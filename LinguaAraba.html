@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impara l'Arabo - App Completa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .arabic-font { font-family: 'Amiri', serif; }
+        .arabic-modern { font-family: 'Cairo', sans-serif; }
+        .main-font { font-family: 'Inter', sans-serif; }
+        
+        .lesson-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #2d5016 0%, #3e7b27 100%);
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .lesson-card.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .lesson-card.locked:hover {
+            transform: none;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transition: width 0.5s ease;
+        }
+        
+        .exercise-card {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .exercise-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .grammar-card {
+            background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
+        }
+        
+        .writing-practice {
+            background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+        }
+        
+        .audio-btn {
+            background: linear-gradient(135deg, #dc2626 0%, #fbbf24 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .audio-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .arabic-char {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            direction: rtl;
+        }
+        
+        .nav-tab {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, #2d5016 0%, #3e7b27 100%);
+            color: white;
+        }
+        
+        .lesson-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .exercise-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .exercise-option:hover {
+            background-color: #fef3c7;
+            transform: translateX(5px);
+        }
+        
+        .exercise-option.correct {
+            background-color: #dcfce7;
+            border-color: #22c55e;
+        }
+        
+        .exercise-option.incorrect {
+            background-color: #fef2f2;
+            border-color: #ef4444;
+        }
+        
+        .arabic-text {
+            direction: rtl;
+            text-align: right;
+        }
+        
+        .arabic-word {
+            direction: rtl;
+            unicode-bidi: embed;
+        }
+    </style>
+</head>
+<body class="main-font bg-gradient-to-br from-green-50 via-yellow-50 to-red-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-green-600 to-red-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg arabic-font">ع</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800">Impara l'Arabo</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="bg-green-100 px-4 py-2 rounded-full">
+                        <span class="text-green-800 font-semibold">Livello: Principiante</span>
+                    </div>
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="progress-bar h-2 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <span class="text-sm text-gray-600 progress-text">0% completato</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-t">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-8 overflow-x-auto py-4">
+                <button class="nav-tab active px-6 py-2 rounded-full font-medium whitespace-nowrap" onclick="showSection('lessons')">
+                    📚 Lezioni
+                </button>
+                <button class="nav-tab px-6 py-2 rounded-full font-medium whitespace-nowrap" onclick="showSection('exercises')">
+                    ✏️ Esercizi
+                </button>
+                <button class="nav-tab px-6 py-2 rounded-full font-medium whitespace-nowrap" onclick="showSection('grammar')">
+                    📖 Grammatica
+                </button>
+                <button class="nav-tab px-6 py-2 rounded-full font-medium whitespace-nowrap" onclick="showSection('writing')">
+                    ✍️ Scrittura
+                </button>
+                <button class="nav-tab px-6 py-2 rounded-full font-medium whitespace-nowrap" onclick="showSection('vocabulary')">
+                    📝 Vocabolario
+                </button>
+                <button class="nav-tab px-6 py-2 rounded-full font-medium whitespace-nowrap" onclick="showSection('progress')">
+                    📊 Progressi
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Lessons Section -->
+        <div id="lessons" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Lezioni Complete</h2>
+                <p class="text-gray-600">Impara l'arabo passo dopo passo con le nostre lezioni interattive</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Lesson 1 -->
+                <div class="lesson-card rounded-xl p-6 text-white cursor-pointer" onclick="openLesson(1)">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Lezione 1</h3>
+                        <span class="lesson-status bg-green-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white">Disponibile</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Alfabeto Arabo</h4>
+                    <p class="text-sm opacity-90 mb-4">Impara le 28 lettere dell'alfabeto arabo</p>
+                    <div class="flex justify-between items-center">
+                        <span class="arabic-font text-2xl arabic-text">أ ب ت ث ج ح</span>
+                        <span class="text-sm">35 min</span>
+                    </div>
+                </div>
+
+                <!-- Lesson 2 -->
+                <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(2)">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Lezione 2</h3>
+                        <span class="lesson-status bg-gray-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white">🔒 Bloccata</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Saluti e Presentazioni</h4>
+                    <p class="text-sm opacity-90 mb-4">Come salutare e presentarsi in arabo</p>
+                    <div class="flex justify-between items-center">
+                        <span class="arabic-font text-2xl arabic-text">السلام عليكم</span>
+                        <span class="text-sm">30 min</span>
+                    </div>
+                </div>
+
+                <!-- Lesson 3 -->
+                <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(3)">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Lezione 3</h3>
+                        <span class="lesson-status bg-gray-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white">🔒 Bloccata</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Numeri e Conteggio</h4>
+                    <p class="text-sm opacity-90 mb-4">I numeri dall'1 al 100</p>
+                    <div class="flex justify-between items-center">
+                        <span class="arabic-font text-2xl arabic-text">واحد اثنان ثلاثة</span>
+                        <span class="text-sm">25 min</span>
+                    </div>
+                </div>
+
+                <!-- Lesson 4 -->
+                <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(4)">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Lezione 4</h3>
+                        <span class="lesson-status bg-gray-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white">🔒 Bloccata</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Famiglia e Relazioni</h4>
+                    <p class="text-sm opacity-90 mb-4">Vocabolario per descrivere la famiglia</p>
+                    <div class="flex justify-between items-center">
+                        <span class="arabic-font text-2xl arabic-text">عائلة</span>
+                        <span class="text-sm">30 min</span>
+                    </div>
+                </div>
+
+                <!-- Lesson 5 -->
+                <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(5)">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Lezione 5</h3>
+                        <span class="lesson-status bg-gray-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white">🔒 Bloccata</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Cibo e Bevande</h4>
+                    <p class="text-sm opacity-90 mb-4">Ordinare cibo e parlare di cucina araba</p>
+                    <div class="flex justify-between items-center">
+                        <span class="arabic-font text-2xl arabic-text">طعام</span>
+                        <span class="text-sm">35 min</span>
+                    </div>
+                </div>
+
+                <!-- Lesson 6 -->
+                <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(6)">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Lezione 6</h3>
+                        <span class="lesson-status bg-gray-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white">🔒 Bloccata</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Tempo e Date</h4>
+                    <p class="text-sm opacity-90 mb-4">Esprimere tempo, ore e date</p>
+                    <div class="flex justify-between items-center">
+                        <span class="arabic-font text-2xl arabic-text">وقت</span>
+                        <span class="text-sm">30 min</span>
+                    </div>
+                </div>
+
+                <!-- Lesson 7 -->
+                <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(7)">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Lezione 7</h3>
+                        <span class="lesson-status bg-gray-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white">🔒 Bloccata</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Shopping e Mercato</h4>
+                    <p class="text-sm opacity-90 mb-4">Fare acquisti e contrattare prezzi</p>
+                    <div class="flex justify-between items-center">
+                        <span class="arabic-font text-2xl arabic-text">سوق</span>
+                        <span class="text-sm">35 min</span>
+                    </div>
+                </div>
+
+                <!-- Lesson 8 -->
+                <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(8)">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Lezione 8</h3>
+                        <span class="lesson-status bg-gray-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white">🔒 Bloccata</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Trasporti e Viaggi</h4>
+                    <p class="text-sm opacity-90 mb-4">Muoversi e viaggiare nei paesi arabi</p>
+                    <div class="flex justify-between items-center">
+                        <span class="arabic-font text-2xl arabic-text">سفر</span>
+                        <span class="text-sm">30 min</span>
+                    </div>
+                </div>
+
+                <!-- Lesson 9 -->
+                <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(9)">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Lezione 9</h3>
+                        <span class="lesson-status bg-gray-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white">🔒 Bloccata</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Cultura e Tradizioni</h4>
+                    <p class="text-sm opacity-90 mb-4">Comprendere la cultura araba</p>
+                    <div class="flex justify-between items-center">
+                        <span class="arabic-font text-2xl arabic-text">ثقافة</span>
+                        <span class="text-sm">40 min</span>
+                    </div>
+                </div>
+
+                <!-- Lesson 10 -->
+                <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(10)">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">Lezione 10</h3>
+                        <span class="lesson-status bg-gray-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white">🔒 Bloccata</span>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Conversazione Avanzata</h4>
+                    <p class="text-sm opacity-90 mb-4">Dialoghi complessi e espressioni idiomatiche</p>
+                    <div class="flex justify-between items-center">
+                        <span class="arabic-font text-2xl arabic-text">محادثة</span>
+                        <span class="text-sm">45 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercises Section -->
+        <div id="exercises" class="section hidden">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Esercizi Interattivi</h2>
+                <p class="text-gray-600">Metti alla prova le tue conoscenze con esercizi pratici</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('alphabet')">
+                    <h3 class="text-xl font-bold mb-2">Quiz Alfabeto</h3>
+                    <p class="text-sm opacity-90 mb-4">Riconosci le lettere dell'alfabeto arabo</p>
+                    <div class="text-4xl arabic-font arabic-text">أ</div>
+                </div>
+                
+                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('vocabulary')">
+                    <h3 class="text-xl font-bold mb-2">Vocabolario</h3>
+                    <p class="text-sm opacity-90 mb-4">Abbina parole arabe e italiane</p>
+                    <div class="text-4xl arabic-font arabic-text">كلمة</div>
+                </div>
+                
+                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('listening')">
+                    <h3 class="text-xl font-bold mb-2">Ascolto</h3>
+                    <p class="text-sm opacity-90 mb-4">Ascolta e scegli la risposta corretta</p>
+                    <div class="text-3xl">🎧</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grammar Section -->
+        <div id="grammar" class="section hidden">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Grammatica Araba</h2>
+                <p class="text-gray-600">Comprendi le regole grammaticali fondamentali</p>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="grammar-card rounded-xl p-6 text-white">
+                    <h3 class="text-xl font-bold mb-4">Articolo Determinativo (ال)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">Maschile</h4>
+                            <p class="text-sm arabic-font arabic-text">الكتاب</p>
+                            <p class="text-xs opacity-90">il libro</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">Femminile</h4>
+                            <p class="text-sm arabic-font arabic-text">المدرسة</p>
+                            <p class="text-xs opacity-90">la scuola</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grammar-card rounded-xl p-6 text-white">
+                    <h3 class="text-xl font-bold mb-4">Pronomi Personali</h3>
+                    <div class="space-y-3">
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">Singolare</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <div><span class="arabic-font arabic-text">أنا</span> - io</div>
+                                <div><span class="arabic-font arabic-text">أنت</span> - tu (m)</div>
+                                <div><span class="arabic-font arabic-text">أنتِ</span> - tu (f)</div>
+                                <div><span class="arabic-font arabic-text">هو</span> - lui</div>
+                                <div><span class="arabic-font arabic-text">هي</span> - lei</div>
+                            </div>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">Plurale</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <div><span class="arabic-font arabic-text">نحن</span> - noi</div>
+                                <div><span class="arabic-font arabic-text">أنتم</span> - voi (m)</div>
+                                <div><span class="arabic-font arabic-text">أنتن</span> - voi (f)</div>
+                                <div><span class="arabic-font arabic-text">هم</span> - loro (m)</div>
+                                <div><span class="arabic-font arabic-text">هن</span> - loro (f)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Writing Section -->
+        <div id="writing" class="section hidden">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Pratica di Scrittura</h2>
+                <p class="text-gray-600">Impara a scrivere le lettere arabe</p>
+            </div>
+            
+            <div class="writing-practice rounded-xl p-6 text-white">
+                <h3 class="text-xl font-bold mb-4">Pratica Alfabeto Arabo</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 text-center cursor-pointer" onclick="practiceCharacter('أ')">
+                        <div class="text-4xl arabic-font text-white arabic-text">أ</div>
+                        <p class="text-sm">alif</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 text-center cursor-pointer" onclick="practiceCharacter('ب')">
+                        <div class="text-4xl arabic-font text-white arabic-text">ب</div>
+                        <p class="text-sm">ba</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 text-center cursor-pointer" onclick="practiceCharacter('ت')">
+                        <div class="text-4xl arabic-font text-white arabic-text">ت</div>
+                        <p class="text-sm">ta</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-lg p-4 text-center cursor-pointer" onclick="practiceCharacter('ث')">
+                        <div class="text-4xl arabic-font text-white arabic-text">ث</div>
+                        <p class="text-sm">tha</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6">
+                    <h4 class="text-gray-800 font-semibold mb-4">Area di Pratica</h4>
+                    <canvas id="writingCanvas" width="400" height="200" class="border-2 border-gray-300 rounded-lg cursor-crosshair"></canvas>
+                    <div class="mt-4 space-x-4">
+                        <button onclick="clearCanvas()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Cancella</button>
+                        <button onclick="checkWriting()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Verifica</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vocabulary Section -->
+        <div id="vocabulary" class="section hidden">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Vocabolario</h2>
+                <p class="text-gray-600">Espandi il tuo vocabolario arabo</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Saluti</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="arabic-font text-lg arabic-text">السلام عليكم</p>
+                                <p class="text-sm text-gray-600">La pace sia con voi</p>
+                            </div>
+                            <button class="audio-btn w-8 h-8 rounded-full flex items-center justify-center text-white text-sm" onclick="playAudio('assalamu-alaikum')">🔊</button>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="arabic-font text-lg arabic-text">شكراً</p>
+                                <p class="text-sm text-gray-600">Grazie</p>
+                            </div>
+                            <button class="audio-btn w-8 h-8 rounded-full flex items-center justify-center text-white text-sm" onclick="playAudio('shukran')">🔊</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Famiglia</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="arabic-font text-lg arabic-text">أب</p>
+                                <p class="text-sm text-gray-600">Padre</p>
+                            </div>
+                            <button class="audio-btn w-8 h-8 rounded-full flex items-center justify-center text-white text-sm" onclick="playAudio('ab')">🔊</button>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="arabic-font text-lg arabic-text">أم</p>
+                                <p class="text-sm text-gray-600">Madre</p>
+                            </div>
+                            <button class="audio-btn w-8 h-8 rounded-full flex items-center justify-center text-white text-sm" onclick="playAudio('umm')">🔊</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Numeri</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="arabic-font text-lg arabic-text">واحد</p>
+                                <p class="text-sm text-gray-600">Uno</p>
+                            </div>
+                            <button class="audio-btn w-8 h-8 rounded-full flex items-center justify-center text-white text-sm" onclick="playAudio('wahid')">🔊</button>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="arabic-font text-lg arabic-text">اثنان</p>
+                                <p class="text-sm text-gray-600">Due</p>
+                            </div>
+                            <button class="audio-btn w-8 h-8 rounded-full flex items-center justify-center text-white text-sm" onclick="playAudio('ithnan')">🔊</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div id="progress" class="section hidden">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">I Tuoi Progressi</h2>
+                <p class="text-gray-600">Monitora i tuoi miglioramenti nell'apprendimento</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Lezioni Completate</h3>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-green-600 mb-2 completed-lessons">0/10</div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-green-600 h-3 rounded-full progress-lessons" style="width: 0%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2 progress-percentage">0% completato</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Parole Imparate</h3>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-orange-600 mb-2">0</div>
+                        <p class="text-sm text-gray-600">Vocabolario attivo</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Streak Giornaliero</h3>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-red-600 mb-2">0</div>
+                        <p class="text-sm text-gray-600">giorni consecutivi</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <button onclick="resetProgress()" class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors">
+                    🔄 Resetta Progressi
+                </button>
+                <p class="text-sm text-gray-500 mt-2">Questo cancellerà tutti i progressi e ricomincerà dall'inizio</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lesson Modal -->
+    <div id="lessonModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="lesson-content max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-xl p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="lessonTitle" class="text-2xl font-bold text-gray-800"></h2>
+                <button onclick="closeLesson()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div id="lessonContent"></div>
+        </div>
+    </div>
+
+    <!-- Exercise Modal -->
+    <div id="exerciseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="lesson-content max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-xl p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="exerciseTitle" class="text-2xl font-bold text-gray-800"></h2>
+                <button onclick="closeExercise()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div id="exerciseContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.remove('hidden');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Progress tracking
+        let completedLessons = JSON.parse(localStorage.getItem('arabicCompletedLessons') || '[]');
+        let unlockedLessons = JSON.parse(localStorage.getItem('arabicUnlockedLessons') || '[1]'); // Lesson 1 is always unlocked
+
+        // Update lesson cards based on progress
+        function updateLessonCards() {
+            const lessonCards = document.querySelectorAll('.lesson-card');
+            lessonCards.forEach((card, index) => {
+                const lessonNumber = index + 1;
+                const statusSpan = card.querySelector('.lesson-status');
+                
+                if (completedLessons.includes(lessonNumber)) {
+                    statusSpan.textContent = 'Completata ✓';
+                    statusSpan.className = 'lesson-status bg-green-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white';
+                    card.classList.remove('locked');
+                    card.style.opacity = '1';
+                    card.style.cursor = 'pointer';
+                } else if (unlockedLessons.includes(lessonNumber)) {
+                    statusSpan.textContent = 'Disponibile';
+                    statusSpan.className = 'lesson-status bg-green-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white';
+                    card.classList.remove('locked');
+                    card.style.opacity = '1';
+                    card.style.cursor = 'pointer';
+                } else {
+                    statusSpan.textContent = '🔒 Bloccata';
+                    statusSpan.className = 'lesson-status bg-gray-500 bg-opacity-90 px-2 py-1 rounded-full text-sm text-white';
+                    card.classList.add('locked');
+                    card.style.opacity = '0.6';
+                    card.style.cursor = 'not-allowed';
+                }
+            });
+            
+            // Update progress bar
+            const progressPercentage = (completedLessons.length / 10) * 100;
+            document.querySelector('.progress-bar').style.width = progressPercentage + '%';
+            document.querySelector('.progress-text').textContent = Math.round(progressPercentage) + '% completato';
+            
+            // Update progress section
+            const completedLessonsEl = document.querySelector('.completed-lessons');
+            const progressLessonsEl = document.querySelector('.progress-lessons');
+            const progressPercentageEl = document.querySelector('.progress-percentage');
+            
+            if (completedLessonsEl) {
+                completedLessonsEl.textContent = `${completedLessons.length}/10`;
+                progressLessonsEl.style.width = progressPercentage + '%';
+                progressPercentageEl.textContent = Math.round(progressPercentage) + '% completato';
+            }
+        }
+
+        // Lesson content data
+        const lessons = {
+            1: {
+                title: "Lezione 1: Alfabeto Arabo",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4">Introduzione all'Alfabeto Arabo</h3>
+                            <p class="mb-4">L'alfabeto arabo è composto da 28 lettere e si scrive da destra a sinistra. Ogni lettera può avere forme diverse a seconda della sua posizione nella parola.</p>
+                            
+                            <h4 class="font-bold mb-3">Le Prime 14 Lettere:</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-7 gap-3 mb-6">
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">أ</div>
+                                    <p class="text-sm font-semibold">alif</p>
+                                    <p class="text-xs text-gray-500">[a]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('alif')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ب</div>
+                                    <p class="text-sm font-semibold">ba</p>
+                                    <p class="text-xs text-gray-500">[b]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ba')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ت</div>
+                                    <p class="text-sm font-semibold">ta</p>
+                                    <p class="text-xs text-gray-500">[t]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ta')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ث</div>
+                                    <p class="text-sm font-semibold">tha</p>
+                                    <p class="text-xs text-gray-500">[th]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('tha')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ج</div>
+                                    <p class="text-sm font-semibold">jim</p>
+                                    <p class="text-xs text-gray-500">[j]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('jim')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ح</div>
+                                    <p class="text-sm font-semibold">ha</p>
+                                    <p class="text-xs text-gray-500">[ḥ]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ha')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">خ</div>
+                                    <p class="text-sm font-semibold">kha</p>
+                                    <p class="text-xs text-gray-500">[kh]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('kha')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">د</div>
+                                    <p class="text-sm font-semibold">dal</p>
+                                    <p class="text-xs text-gray-500">[d]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('dal')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ذ</div>
+                                    <p class="text-sm font-semibold">dhal</p>
+                                    <p class="text-xs text-gray-500">[dh]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('dhal')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ر</div>
+                                    <p class="text-sm font-semibold">ra</p>
+                                    <p class="text-xs text-gray-500">[r]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ra')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ز</div>
+                                    <p class="text-sm font-semibold">zay</p>
+                                    <p class="text-xs text-gray-500">[z]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('zay')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">س</div>
+                                    <p class="text-sm font-semibold">sin</p>
+                                    <p class="text-xs text-gray-500">[s]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('sin')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ش</div>
+                                    <p class="text-sm font-semibold">shin</p>
+                                    <p class="text-xs text-gray-500">[sh]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('shin')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ص</div>
+                                    <p class="text-sm font-semibold">sad</p>
+                                    <p class="text-xs text-gray-500">[ṣ]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('sad')">🔊</button>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-3">Le Ultime 14 Lettere:</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-7 gap-3 mb-6">
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ض</div>
+                                    <p class="text-sm font-semibold">dad</p>
+                                    <p class="text-xs text-gray-500">[ḍ]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('dad')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ط</div>
+                                    <p class="text-sm font-semibold">ta</p>
+                                    <p class="text-xs text-gray-500">[ṭ]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ta-heavy')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ظ</div>
+                                    <p class="text-sm font-semibold">za</p>
+                                    <p class="text-xs text-gray-500">[ẓ]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('za')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ع</div>
+                                    <p class="text-sm font-semibold">ain</p>
+                                    <p class="text-xs text-gray-500">[ʿ]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ain')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">غ</div>
+                                    <p class="text-sm font-semibold">ghain</p>
+                                    <p class="text-xs text-gray-500">[gh]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ghain')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ف</div>
+                                    <p class="text-sm font-semibold">fa</p>
+                                    <p class="text-xs text-gray-500">[f]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('fa')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ق</div>
+                                    <p class="text-sm font-semibold">qaf</p>
+                                    <p class="text-xs text-gray-500">[q]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('qaf')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ك</div>
+                                    <p class="text-sm font-semibold">kaf</p>
+                                    <p class="text-xs text-gray-500">[k]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('kaf')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ل</div>
+                                    <p class="text-sm font-semibold">lam</p>
+                                    <p class="text-xs text-gray-500">[l]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('lam')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">م</div>
+                                    <p class="text-sm font-semibold">mim</p>
+                                    <p class="text-xs text-gray-500">[m]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('mim')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ن</div>
+                                    <p class="text-sm font-semibold">nun</p>
+                                    <p class="text-xs text-gray-500">[n]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('nun')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ه</div>
+                                    <p class="text-sm font-semibold">ha</p>
+                                    <p class="text-xs text-gray-500">[h]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ha-light')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">و</div>
+                                    <p class="text-sm font-semibold">waw</p>
+                                    <p class="text-xs text-gray-500">[w/u]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('waw')">🔊</button>
+                                </div>
+                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-3xl mb-2 arabic-text">ي</div>
+                                    <p class="text-sm font-semibold">ya</p>
+                                    <p class="text-xs text-gray-500">[y/i]</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ya')">🔊</button>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-3">Forme delle Lettere:</h4>
+                            <div class="bg-yellow-50 p-4 rounded-lg mb-6">
+                                <p class="text-sm mb-3">Ogni lettera araba può avere fino a 4 forme diverse a seconda della sua posizione:</p>
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                                    <div class="text-center p-3 bg-white rounded-lg">
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">ب</div>
+                                        <p class="text-xs">Isolata</p>
+                                    </div>
+                                    <div class="text-center p-3 bg-white rounded-lg">
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">بـ</div>
+                                        <p class="text-xs">Iniziale</p>
+                                    </div>
+                                    <div class="text-center p-3 bg-white rounded-lg">
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">ـبـ</div>
+                                        <p class="text-xs">Mediana</p>
+                                    </div>
+                                    <div class="text-center p-3 bg-white rounded-lg">
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">ـب</div>
+                                        <p class="text-xs">Finale</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-3">Prime Parole Semplici:</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                                <div class="p-4 bg-white rounded-lg shadow-sm border-l-4 border-green-500">
+                                    <div class="arabic-font text-2xl mb-2 arabic-text">بيت</div>
+                                    <p class="text-sm font-semibold">casa</p>
+                                    <p class="text-xs text-gray-500">[bayt]</p>
+                                    <button class="audio-btn mt-2 px-2 py-1 rounded text-white text-xs" onclick="playAudio('bayt')">🔊</button>
+                                </div>
+                                <div class="p-4 bg-white rounded-lg shadow-sm border-l-4 border-green-500">
+                                    <div class="arabic-font text-2xl mb-2 arabic-text">كتاب</div>
+                                    <p class="text-sm font-semibold">libro</p>
+                                    <p class="text-xs text-gray-500">[kitab]</p>
+                                    <button class="audio-btn mt-2 px-2 py-1 rounded text-white text-xs" onclick="playAudio('kitab')">🔊</button>
+                                </div>
+                                <div class="p-4 bg-white rounded-lg shadow-sm border-l-4 border-red-500">
+                                    <div class="arabic-font text-2xl mb-2 arabic-text">ماء</div>
+                                    <p class="text-sm font-semibold">acqua</p>
+                                    <p class="text-xs text-gray-500">[ma']</p>
+                                    <button class="audio-btn mt-2 px-2 py-1 rounded text-white text-xs" onclick="playAudio('maa')">🔊</button>
+                                </div>
+                                <div class="p-4 bg-white rounded-lg shadow-sm border-l-4 border-red-500">
+                                    <div class="arabic-font text-2xl mb-2 arabic-text">نار</div>
+                                    <p class="text-sm font-semibold">fuoco</p>
+                                    <p class="text-xs text-gray-500">[nar]</p>
+                                    <button class="audio-btn mt-2 px-2 py-1 rounded text-white text-xs" onclick="playAudio('nar')">🔊</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-orange-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4">Esercizio Pratico</h3>
+                            <p class="mb-4">Prova a riconoscere queste lettere:</p>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="text-center p-4 bg-white rounded-lg cursor-pointer hover:bg-gray-50" onclick="checkReading('ب', 'ba')">
+                                    <div class="arabic-font text-3xl arabic-text">ب</div>
+                                </div>
+                                <div class="text-center p-4 bg-white rounded-lg cursor-pointer hover:bg-gray-50" onclick="checkReading('ت', 'ta')">
+                                    <div class="arabic-font text-3xl arabic-text">ت</div>
+                                </div>
+                                <div class="text-center p-4 bg-white rounded-lg cursor-pointer hover:bg-gray-50" onclick="checkReading('س', 'sin')">
+                                    <div class="arabic-font text-3xl arabic-text">س</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <button onclick="closeLesson()" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600">Chiudi</button>
+                            <button onclick="completeLesson(1)" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">Completa Lezione</button>
+                        </div>
+                    </div>
+                `
+            },
+            2: {
+                title: "Lezione 2: Saluti e Presentazioni",
+                content: `
+                    <div class="space-y-6">
+                        <div class="bg-red-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4">Saluti Islamici Tradizionali</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm">
+                                    <div>
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">السلام عليكم</div>
+                                        <p class="text-gray-600 font-semibold">La pace sia con voi</p>
+                                        <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">as-salamu alaikum</span></p>
+                                        <p class="text-xs text-blue-600">Il saluto più comune nel mondo arabo</p>
+                                    </div>
+                                    <button class="audio-btn px-4 py-2 rounded text-white" onclick="playAudio('assalamu-alaikum')">🔊 Ascolta</button>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm">
+                                    <div>
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">وعليكم السلام</div>
+                                        <p class="text-gray-600 font-semibold">E su di voi la pace</p>
+                                        <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">wa alaikum as-salam</span></p>
+                                        <p class="text-xs text-blue-600">Risposta al saluto precedente</p>
+                                    </div>
+                                    <button class="audio-btn px-4 py-2 rounded text-white" onclick="playAudio('wa-alaikum-assalam')">🔊 Ascolta</button>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm">
+                                    <div>
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">أهلاً وسهلاً</div>
+                                        <p class="text-gray-600 font-semibold">Benvenuto</p>
+                                        <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">ahlan wa sahlan</span></p>
+                                        <p class="text-xs text-blue-600">Espressione di benvenuto molto calorosa</p>
+                                    </div>
+                                    <button class="audio-btn px-4 py-2 rounded text-white" onclick="playAudio('ahlan-wa-sahlan')">🔊 Ascolta</button>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm">
+                                    <div>
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">مرحباً</div>
+                                        <p class="text-gray-600 font-semibold">Ciao / Benvenuto</p>
+                                        <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">marhaban</span></p>
+                                        <p class="text-xs text-blue-600">Saluto informale e amichevole</p>
+                                    </div>
+                                    <button class="audio-btn px-4 py-2 rounded text-white" onclick="playAudio('marhaban')">🔊 Ascolta</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4">Saluti in Momenti Diversi</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm">
+                                    <div>
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">صباح الخير</div>
+                                        <p class="text-gray-600 font-semibold">Buongiorno</p>
+                                        <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">sabah al-khayr</span></p>
+                                        <p class="text-xs text-blue-600">Letteralmente: "mattina del bene"</p>
+                                    </div>
+                                    <button class="audio-btn px-4 py-2 rounded text-white" onclick="playAudio('sabah-alkhayr')">🔊 Ascolta</button>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm">
+                                    <div>
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">صباح النور</div>
+                                        <p class="text-gray-600 font-semibold">Mattina di luce (risposta)</p>
+                                        <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">sabah an-nur</span></p>
+                                        <p class="text-xs text-blue-600">Risposta a "sabah al-khayr"</p>
+                                    </div>
+                                    <button class="audio-btn px-4 py-2 rounded text-white" onclick="playAudio('sabah-annur')">🔊 Ascolta</button>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm">
+                                    <div>
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">مساء الخير</div>
+                                        <p class="text-gray-600 font-semibold">Buonasera</p>
+                                        <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">masa' al-khayr</span></p>
+                                        <p class="text-xs text-blue-600">Usato dal pomeriggio in poi</p>
+                                    </div>
+                                    <button class="audio-btn px-4 py-2 rounded text-white" onclick="playAudio('masaa-alkhayr')">🔊 Ascolta</button>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm">
+                                    <div>
+                                        <div class="arabic-font text-2xl mb-1 arabic-text">مساء النور</div>
+                                        <p class="text-gray-600 font-semibold">Sera di luce (risposta)</p>
+                                        <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">masa' an-nur</span></p>
+                                        <p class="text-xs text-blue-600">Risposta a "masa' al-khayr"</p>
+                                    </div>
+                                    <button class="audio-btn px-4 py-2 rounded text-white" onclick="playAudio('masaa-annur')">🔊 Ascolta</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4">Presentarsi (التعريف بالنفس)</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-xl mb-2 arabic-text">اسمي [nome]</div>
+                                    <p class="text-gray-600 font-semibold">Il mio nome è [nome]</p>
+                                    <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">ismi [nome]</span></p>
+                                    <p class="text-xs text-blue-600">Esempio: اسمي ماركو (ismi Marko)</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ismi')">🔊</button>
+                                </div>
+                                
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-xl mb-2 arabic-text">أنا من إيطاليا</div>
+                                    <p class="text-gray-600 font-semibold">Vengo dall'Italia</p>
+                                    <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">ana min italya</span></p>
+                                    <p class="text-xs text-blue-600">أنا = io, من = da/di, إيطاليا = Italia</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ana-min-italya')">🔊</button>
+                                </div>
+                                
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-xl mb-2 arabic-text">تشرفنا</div>
+                                    <p class="text-gray-600 font-semibold">È un onore / Piacere di conoscerti</p>
+                                    <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">tasharrafna</span></p>
+                                    <p class="text-xs text-blue-600">Espressione formale di cortesia</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('tasharrafna')">🔊</button>
+                                </div>
+                                
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-xl mb-2 arabic-text">فرصة سعيدة</div>
+                                    <p class="text-gray-600 font-semibold">Occasione felice</p>
+                                    <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">fursa sa'ida</span></p>
+                                    <p class="text-xs text-blue-600">Risposta a "tasharrafna"</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('fursa-saida')">🔊</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4">Domande Utili (أسئلة مفيدة)</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-xl mb-2 arabic-text">ما اسمك؟</div>
+                                    <p class="text-gray-600 font-semibold">Come ti chiami?</p>
+                                    <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">ma ismak?</span> (a un uomo)</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ma-ismak')">🔊</button>
+                                </div>
+                                
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-xl mb-2 arabic-text">ما اسمك؟</div>
+                                    <p class="text-gray-600 font-semibold">Come ti chiami?</p>
+                                    <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">ma ismik?</span> (a una donna)</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('ma-ismik')">🔊</button>
+                                </div>
+                                
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-xl mb-2 arabic-text">من أين أنت؟</div>
+                                    <p class="text-gray-600 font-semibold">Da dove vieni?</p>
+                                    <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">min ayn anta?</span> (a un uomo)</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('min-ayn-anta')">🔊</button>
+                                </div>
+                                
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-xl mb-2 arabic-text">كيف حالك؟</div>
+                                    <p class="text-gray-600 font-semibold">Come stai?</p>
+                                    <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">kayf halak?</span> (a un uomo)</p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('kayf-halak')">🔊</button>
+                                </div>
+                                
+                                <div class="p-4 bg-white rounded-lg shadow-sm">
+                                    <div class="arabic-font text-xl mb-2 arabic-text">بخير، الحمد لله</div>
+                                    <p class="text-gray-600 font-semibold">Bene, grazie a Dio</p>
+                                    <p class="text-sm text-gray-500">Pronuncia: <span class="font-mono">bi-khayr, al-hamdu lillah</span></p>
+                                    <button class="audio-btn mt-2 px-3 py-1 rounded text-white text-xs" onclick="playAudio('bikhayr-alhamdulillah')">🔊</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4">Dialogo di Esempio</h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-white rounded-lg border-l-4 border-green-500">
+                                    <p class="arabic-font text-lg arabic-text">أ: السلام عليكم!</p>
+                                    <p class="text-sm text-blue-600 font-mono mb-1">Pronuncia: as-salamu alaikum!</p>
+                                    <p class="text-sm text-gray-600">A: La pace sia con voi!</p>
+                                </div>
+                                <div class="p-3 bg-white rounded-lg border-l-4 border-red-500">
+                                    <p class="arabic-font text-lg arabic-text">ب: وعليكم السلام! اسمي أحمد.</p>
+                                    <p class="text-sm text-blue-600 font-mono mb-1">Pronuncia: wa alaikum as-salam! ismi Ahmed.</p>
+                                    <p class="text-sm text-gray-600">B: E su di voi la pace! Il mio nome è Ahmed.</p>
+                                </div>
+                                <div class="p-3 bg-white rounded-lg border-l-4 border-green-500">
+                                    <p class="arabic-font text-lg arabic-text">أ: تشرفنا! أنا ماركو من إيطاليا.</p>
+                                    <p class="text-sm text-blue-600 font-mono mb-1">Pronuncia: tasharrafna! ana Marko min Italya.</p>
+                                    <p class="text-sm text-gray-600">A: È un onore! Io sono Marco dall'Italia.</p>
+                                </div>
+                                <div class="p-3 bg-white rounded-lg border-l-4 border-red-500">
+                                    <p class="arabic-font text-lg arabic-text">ب: أهلاً وسهلاً بك!</p>
+                                    <p class="text-sm text-blue-600 font-mono mb-1">Pronuncia: ahlan wa sahlan bik!</p>
+                                    <p class="text-sm text-gray-600">B: Benvenuto!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 p-4 bg-white rounded-lg border-2 border-dashed border-purple-300">
+                                <h4 class="font-bold text-purple-800 mb-3">💡 Suggerimento per la Pronuncia:</h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• <strong>kh</strong> = come la "ch" tedesca in "ach"</li>
+                                    <li>• <strong>gh</strong> = come la "r" francese parigina</li>
+                                    <li>• <strong>ḥ</strong> = "h" aspirata dal profondo della gola</li>
+                                    <li>• <strong>'</strong> = colpo di glottide (come in "uh-oh")</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <button onclick="closeLesson()" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600">Chiudi</button>
+                            <button onclick="completeLesson(2)" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">Completa Lezione</button>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // Exercise data
+        const exercises = {
+            alphabet: {
+                title: "Quiz Alfabeto Arabo",
+                questions: [
+                    {
+                        question: "Quale suono rappresenta questo carattere?",
+                        character: "ب",
+                        options: ["ba", "ta", "tha", "jim"],
+                        correct: 0
+                    },
+                    {
+                        question: "Come si chiama questa lettera?",
+                        character: "ج",
+                        options: ["ha", "kha", "jim", "dal"],
+                        correct: 2
+                    },
+                    {
+                        question: "Quale lettera è questa?",
+                        character: "س",
+                        options: ["shin", "sin", "sad", "dad"],
+                        correct: 1
+                    }
+                ]
+            },
+            vocabulary: {
+                title: "Quiz Vocabolario",
+                questions: [
+                    {
+                        question: "Cosa significa 'السلام عليكم'?",
+                        character: "السلام عليكم",
+                        options: ["Buongiorno", "La pace sia con voi", "Grazie", "Prego"],
+                        correct: 1
+                    },
+                    {
+                        question: "Come si dice 'casa' in arabo?",
+                        character: "?",
+                        options: ["كتاب", "بيت", "ماء", "نار"],
+                        correct: 1
+                    }
+                ]
+            }
+        };
+
+        let currentExercise = null;
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // Functions
+        function openLesson(lessonNumber) {
+            // Check if lesson is unlocked
+            if (!unlockedLessons.includes(lessonNumber)) {
+                alert('🔒 Questa lezione è bloccata! Completa prima le lezioni precedenti per sbloccarla.');
+                return;
+            }
+            
+            const lesson = lessons[lessonNumber];
+            if (lesson) {
+                document.getElementById('lessonTitle').textContent = lesson.title;
+                document.getElementById('lessonContent').innerHTML = lesson.content;
+                document.getElementById('lessonModal').classList.remove('hidden');
+            }
+        }
+
+        function closeLesson() {
+            document.getElementById('lessonModal').classList.add('hidden');
+        }
+
+        function completeLesson(lessonNumber) {
+            // Mark lesson as completed
+            if (!completedLessons.includes(lessonNumber)) {
+                completedLessons.push(lessonNumber);
+                localStorage.setItem('arabicCompletedLessons', JSON.stringify(completedLessons));
+                
+                // Unlock next lesson
+                const nextLesson = lessonNumber + 1;
+                if (nextLesson <= 10 && !unlockedLessons.includes(nextLesson)) {
+                    unlockedLessons.push(nextLesson);
+                    localStorage.setItem('arabicUnlockedLessons', JSON.stringify(unlockedLessons));
+                }
+                
+                // Update UI
+                updateLessonCards();
+                
+                // Show completion message
+                const nextLessonMessage = nextLesson <= 10 ? `\n🎉 Hai sbloccato la Lezione ${nextLesson}!` : '\n🏆 Hai completato tutte le lezioni disponibili!';
+                alert(`Congratulazioni! Hai completato la Lezione ${lessonNumber}!${nextLessonMessage}`);
+            } else {
+                alert(`Hai già completato la Lezione ${lessonNumber}!`);
+            }
+            
+            closeLesson();
+        }
+
+        function startExercise(exerciseType) {
+            currentExercise = exercises[exerciseType];
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            if (currentExercise) {
+                document.getElementById('exerciseTitle').textContent = currentExercise.title;
+                showQuestion();
+                document.getElementById('exerciseModal').classList.remove('hidden');
+            }
+        }
+
+        function showQuestion() {
+            const question = currentExercise.questions[currentQuestionIndex];
+            const content = `
+                <div class="text-center mb-8">
+                    <div class="arabic-font text-6xl mb-4 arabic-text">${question.character}</div>
+                    <h3 class="text-xl font-semibold mb-6">${question.question}</h3>
+                    <div class="space-y-3">
+                        ${question.options.map((option, index) => `
+                            <div class="exercise-option p-4 border-2 border-gray-200 rounded-lg" onclick="selectAnswer(${index})">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <p class="text-gray-600">Domanda ${currentQuestionIndex + 1} di ${currentExercise.questions.length}</p>
+                </div>
+            `;
+            document.getElementById('exerciseContent').innerHTML = content;
+        }
+
+        function selectAnswer(selectedIndex) {
+            const question = currentExercise.questions[currentQuestionIndex];
+            const options = document.querySelectorAll('.exercise-option');
+            
+            options.forEach((option, index) => {
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedIndex && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+                option.style.pointerEvents = 'none';
+            });
+            
+            if (selectedIndex === question.correct) {
+                score++;
+            }
+            
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < currentExercise.questions.length) {
+                    showQuestion();
+                } else {
+                    showExerciseResults();
+                }
+            }, 1500);
+        }
+
+        function showExerciseResults() {
+            const percentage = Math.round((score / currentExercise.questions.length) * 100);
+            const content = `
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold mb-4">Risultati</h3>
+                    <div class="text-6xl mb-4">${percentage >= 70 ? '🎉' : '📚'}</div>
+                    <p class="text-xl mb-2">Hai risposto correttamente a ${score} su ${currentExercise.questions.length} domande</p>
+                    <p class="text-lg text-gray-600 mb-6">${percentage}% di accuratezza</p>
+                    <div class="space-x-4">
+                        <button onclick="closeExercise()" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600">Chiudi</button>
+                        <button onclick="startExercise('${Object.keys(exercises).find(key => exercises[key] === currentExercise)}')" class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600">Riprova</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('exerciseContent').innerHTML = content;
+        }
+
+        function closeExercise() {
+            document.getElementById('exerciseModal').classList.add('hidden');
+        }
+
+        function playAudio(word) {
+            // Simulate audio playback
+            console.log(`Playing audio for: ${word}`);
+            alert(`🔊 Audio simulato per: ${word}\n(Nota: L'audio non è supportato in questa demo)`);
+        }
+
+        function practiceCharacter(char) {
+            alert(`Pratica il carattere: ${char}\nUsa l'area di disegno qui sotto per esercitarti!`);
+        }
+
+        function checkReading(char, reading) {
+            alert(`Carattere: ${char}\nLettura: ${reading}\nBravo! 👏`);
+        }
+
+        // Canvas for writing practice
+        let canvas, ctx, isDrawing = false;
+
+        window.onload = function() {
+            // Initialize lesson cards
+            updateLessonCards();
+            
+            // Initialize canvas
+            canvas = document.getElementById('writingCanvas');
+            if (canvas) {
+                ctx = canvas.getContext('2d');
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+
+                canvas.addEventListener('mousedown', startDrawing);
+                canvas.addEventListener('mousemove', draw);
+                canvas.addEventListener('mouseup', stopDrawing);
+                canvas.addEventListener('mouseout', stopDrawing);
+            }
+        };
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function checkWriting() {
+            alert('Ottimo lavoro! Continua a praticare la scrittura araba! ✍️');
+        }
+
+        function resetProgress() {
+            if (confirm('Sei sicuro di voler resettare tutti i progressi? Questa azione non può essere annullata.')) {
+                localStorage.removeItem('arabicCompletedLessons');
+                localStorage.removeItem('arabicUnlockedLessons');
+                completedLessons = [];
+                unlockedLessons = [1];
+                updateLessonCards();
+                alert('✅ Progressi resettati! Ora puoi ricominciare dall\'inizio.');
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f2bee985305837',t:'MTc1NTE5ODU1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
