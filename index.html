@@ -101,10 +101,22 @@
             direction: rtl;
             text-align: right;
         }
+
+        .arabic-form-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .arabic-form-box .arabic-font {
+            font-size: 2.25rem; /* text-4xl */
+        }
     </style>
 </head>
 <body class="main-font bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 min-h-screen">
-    <!-- Header -->
     <header class="bg-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
@@ -127,7 +139,6 @@
         </div>
     </header>
 
-    <!-- Navigation -->
     <nav class="bg-white shadow-sm border-t">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex space-x-8 overflow-x-auto py-4">
@@ -150,10 +161,8 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Lessons Section -->
         <div id="lessons" class="section">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-gray-800 mb-2">Lezioni Complete</h2>
@@ -161,7 +170,6 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Lesson 1 -->
                 <div class="lesson-card rounded-xl p-6 text-white cursor-pointer" onclick="openLesson(1)">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold">Lezione 1</h3>
@@ -175,7 +183,6 @@
                     </div>
                 </div>
 
-                <!-- Lesson 2 -->
                 <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(2)">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold">Lezione 2</h3>
@@ -189,7 +196,6 @@
                     </div>
                 </div>
 
-                <!-- Lesson 3 -->
                 <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(3)">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold">Lezione 3</h3>
@@ -203,7 +209,6 @@
                     </div>
                 </div>
 
-                <!-- Lesson 4 -->
                 <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(4)">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold">Lezione 4</h3>
@@ -217,7 +222,6 @@
                     </div>
                 </div>
 
-                <!-- Lesson 5 -->
                 <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(5)">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold">Lezione 5</h3>
@@ -231,7 +235,6 @@
                     </div>
                 </div>
 
-                <!-- Lesson 6 -->
                 <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(6)">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold">Lezione 6</h3>
@@ -245,7 +248,6 @@
                     </div>
                 </div>
 
-                <!-- Lesson 7 -->
                 <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(7)">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold">Lezione 7</h3>
@@ -259,7 +261,6 @@
                     </div>
                 </div>
 
-                <!-- Lesson 8 -->
                 <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(8)">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold">Lezione 8</h3>
@@ -273,7 +274,6 @@
                     </div>
                 </div>
 
-                <!-- Lesson 9 -->
                 <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(9)">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold">Lezione 9</h3>
@@ -287,7 +287,6 @@
                     </div>
                 </div>
 
-                <!-- Lesson 10 -->
                 <div class="lesson-card locked rounded-xl p-6 text-white cursor-not-allowed" onclick="openLesson(10)">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold">Lezione 10</h3>
@@ -303,7 +302,6 @@
             </div>
         </div>
 
-        <!-- Exercises Section -->
         <div id="exercises" class="section hidden">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-gray-800 mb-2">Esercizi Interattivi</h2>
@@ -311,27 +309,44 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('alphabet')">
-                    <h3 class="text-xl font-bold mb-2">Quiz Alfabeto</h3>
-                    <p class="text-sm opacity-90 mb-4">Riconosci le lettere arabe</p>
+                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('alphabet1')">
+                    <h3 class="text-xl font-bold mb-2">Quiz Alfabeto 1</h3>
+                    <p class="text-sm opacity-90 mb-4">Riconosci le prime lettere</p>
                     <div class="text-4xl arabic-font">ع</div>
                 </div>
+
+                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('alphabet2')">
+                    <h3 class="text-xl font-bold mb-2">Quiz Alfabeto 2</h3>
+                    <p class="text-sm opacity-90 mb-4">Associa le forme delle lettere</p>
+                    <div class="text-4xl arabic-font">ت</div>
+                </div>
                 
-                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('vocabulary')">
-                    <h3 class="text-xl font-bold mb-2">Vocabolario</h3>
+                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('vocabulary1')">
+                    <h3 class="text-xl font-bold mb-2">Vocabolario 1</h3>
                     <p class="text-sm opacity-90 mb-4">Abbina parole arabe e italiane</p>
                     <div class="text-4xl arabic-font">كلمة</div>
                 </div>
+
+                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('vocabulary2')">
+                    <h3 class="text-xl font-bold mb-2">Vocabolario 2</h3>
+                    <p class="text-sm opacity-90 mb-4">Traduci le frasi comuni</p>
+                    <div class="text-4xl arabic-font">جملة</div>
+                </div>
                 
-                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('numbers')">
-                    <h3 class="text-xl font-bold mb-2">Numeri</h3>
+                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('numbers1')">
+                    <h3 class="text-xl font-bold mb-2">Numeri 1</h3>
                     <p class="text-sm opacity-90 mb-4">Pratica i numeri arabi</p>
                     <div class="text-4xl arabic-font">رقم</div>
+                </div>
+
+                <div class="exercise-card rounded-xl p-6 text-white cursor-pointer" onclick="startExercise('numbers2')">
+                    <h3 class="text-xl font-bold mb-2">Numeri 2</h3>
+                    <p class="text-sm opacity-90 mb-4">Riconosci i numeri più alti</p>
+                    <div class="text-4xl arabic-font">٧</div>
                 </div>
             </div>
         </div>
 
-        <!-- Grammar Section -->
         <div id="grammar" class="section hidden">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-gray-800 mb-2">Grammatica Araba</h2>
@@ -344,20 +359,36 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="bg-white bg-opacity-20 rounded-lg p-4">
                             <h4 class="font-semibold mb-2 arabic-text">الـ - L'articolo determinativo</h4>
-                            <p class="text-sm arabic-text">البيت (la casa)</p>
-                            <p class="text-sm arabic-text">الكتاب (il libro)</p>
+                            <p class="text-sm">Simile a "il", "la", "lo", "i", "le" in italiano.</p>
+                            <p class="text-sm arabic-text">البيت (al-bayt) - la casa</p>
                         </div>
                         <div class="bg-white bg-opacity-20 rounded-lg p-4">
-                            <h4 class="font-semibold mb-2">Genere e Numero</h4>
-                            <p class="text-sm">Maschile e femminile</p>
-                            <p class="text-sm">Singolare, duale, plurale</p>
+                            <h4 class="font-semibold mb-2">Articolo Indeterminativo (Tanwin)</h4>
+                            <p class="text-sm">Assenza di articolo. Indicato da due vocali brevi alla fine della parola.</p>
+                            <p class="text-sm arabic-text">بيت (bayt) - una casa</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grammar-card rounded-xl p-6 text-white">
+                    <h3 class="text-xl font-bold mb-4">Genere e Numero</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">Maschile e Femminile</h4>
+                            <p class="text-sm">Il femminile è spesso indicato dalla lettera ة alla fine della parola.</p>
+                            <p class="text-sm arabic-text">طالب (ṭālib) - studente (M)</p>
+                            <p class="text-sm arabic-text">طالبة (ṭāliba) - studentessa (F)</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">Singolare, Duale, Plurale</h4>
+                            <p class="text-sm">L'arabo ha forme specifiche per indicare due oggetti (duale).</p>
+                            <p class="text-sm arabic-text">كتاب (kitāb) - libro (Singolare)</p>
+                            <p class="text-sm arabic-text">كتابان (kitābān) - due libri (Duale)</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Vocabulary Section -->
         <div id="vocabulary" class="section hidden">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-gray-800 mb-2">Vocabolario</h2>
@@ -433,7 +464,6 @@
             </div>
         </div>
 
-        <!-- Progress Section -->
         <div id="progress" class="section hidden">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-gray-800 mb-2">I Tuoi Progressi</h2>
@@ -478,7 +508,6 @@
         </div>
     </main>
 
-    <!-- Lesson Modal -->
     <div id="lessonModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
         <div class="lesson-content max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-xl p-8">
             <div class="flex justify-between items-center mb-6">
@@ -489,7 +518,6 @@
         </div>
     </div>
 
-    <!-- Exercise Modal -->
     <div id="exerciseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
         <div class="lesson-content max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-xl p-8">
             <div class="flex justify-between items-center mb-6">
@@ -562,45 +590,613 @@
             }
         }
 
-        // Lesson content data with all 10 lessons
+        // Lesson content data
         const lessons = {
             1: {
                 title: "Lezione 1: Alfabeto Arabo",
                 content: `
                     <div class="space-y-6">
                         <div class="bg-green-50 p-6 rounded-lg">
-                            <h3 class="text-xl font-bold mb-4">L'Alfabeto Arabo</h3>
-                            <p class="mb-4">L'arabo ha 28 lettere che cambiano forma a seconda della posizione nella parola.</p>
+                            <h3 class="text-xl font-bold mb-4">Forme delle Lettere</h3>
+                            <p class="mb-4">Le 28 lettere arabe cambiano forma a seconda della loro posizione nella parola: isolata, iniziale, mediana e finale.</p>
                             
-                            <h4 class="font-bold mb-3">Prime Lettere:</h4>
-                            <div class="grid grid-cols-4 md:grid-cols-7 gap-3 mb-6">
-                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
-                                    <div class="text-3xl mb-2 arabic-font">أ</div>
-                                    <p class="text-sm font-semibold">alif</p>
+                            <h4 class="font-bold mb-2">Alif (ا)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ا</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
                                 </div>
-                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
-                                    <div class="text-3xl mb-2 arabic-font">ب</div>
-                                    <p class="text-sm font-semibold">ba</p>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">أ-</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
                                 </div>
-                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
-                                    <div class="text-3xl mb-2 arabic-font">ت</div>
-                                    <p class="text-sm font-semibold">ta</p>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ـأ-</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
                                 </div>
-                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
-                                    <div class="text-3xl mb-2 arabic-font">ث</div>
-                                    <p class="text-sm font-semibold">tha</p>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ـا</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
                                 </div>
-                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
-                                    <div class="text-3xl mb-2 arabic-font">ج</div>
-                                    <p class="text-sm font-semibold">jim</p>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Ba (ب)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ب</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
                                 </div>
-                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
-                                    <div class="text-3xl mb-2 arabic-font">ح</div>
-                                    <p class="text-sm font-semibold">ha</p>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">بـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
                                 </div>
-                                <div class="text-center p-3 bg-white rounded-lg shadow-sm">
-                                    <div class="text-3xl mb-2 arabic-font">خ</div>
-                                    <p class="text-sm font-semibold">kha</p>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-بـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ب</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-2">Ta (ت)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ت</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">تـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-تـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ت</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Tha (ث)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ث</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ثـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ثـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ث</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+                            
+                             <h4 class="font-bold mb-2">Jim (ج)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ج</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">جـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-جـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ج</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-2">Ha (ح)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ح</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">حـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-حـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ح</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Kha (خ)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">خ</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">خـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-خـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-خ</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Dal (د)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">د</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">د</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-د</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-د</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-2">Dhal (ذ)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ذ</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ذ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ذ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ذ</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Ra (ر)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ر</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ر</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ر</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ر</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Zay (ز)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ز</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ز</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ز</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ز</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Sin (س)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">س</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">سـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-سـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-س</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Shin (ش)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ش</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">شـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-شـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ش</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-2">Sad (ص)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ص</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">صـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-صـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ص</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Dad (ض)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ض</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ضـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ضـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ض</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-2">Ta (ط)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ط</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">طـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-طـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ط</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-2">Za (ظ)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ظ</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ظـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ظـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ظ</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-2">Ayn (ع)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ع</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">عـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-عـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ع</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Ghayn (غ)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">غ</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">غـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-غـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-غ</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Fa (ف)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ف</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">فـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-فـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ف</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Qaf (ق)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ق</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">قـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-قـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ق</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Kaf (ك)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ك</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">كـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-كـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ك</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Lam (ل)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ل</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">لـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-لـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ل</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Mim (م)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">م</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">مـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-مـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-م</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Nun (ن)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ن</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">نـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-نـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ن</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Ha (ه)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ه</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">هـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-هـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ه</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Waw (و)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">و</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">و</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-و</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-و</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold mb-2">Ya (ي)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ي</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">يـ</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-يـ</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ي</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Ta Marbuta (ة)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ة</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ـة</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold mb-2">Hamza (ء)</h4>
+                            <div class="grid grid-cols-4 text-center gap-3 mb-4">
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ء</div>
+                                    <span class="text-xs text-gray-600">Isolata</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">ء</div>
+                                    <span class="text-xs text-gray-600">Iniziale</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ء-</div>
+                                    <span class="text-xs text-gray-600">Mediana</span>
+                                </div>
+                                <div class="arabic-form-box">
+                                    <div class="arabic-font">-ء</div>
+                                    <span class="text-xs text-gray-600">Finale</span>
                                 </div>
                             </div>
                         </div>
@@ -874,8 +1470,8 @@
 
         // Exercise data
         const exercises = {
-            alphabet: {
-                title: "Quiz Alfabeto",
+            alphabet1: {
+                title: "Quiz Alfabeto 1",
                 questions: [
                     {
                         question: "Quale lettera è questa?",
@@ -888,28 +1484,103 @@
                         character: "ح",
                         options: ["ha", "kha", "jim", "ha"],
                         correct: 0
+                    },
+                    {
+                        question: "Quale di queste lettere è la 'dal'?",
+                        character: "د",
+                        options: ["ذ", "ر", "د", "و"],
+                        correct: 2
                     }
                 ]
             },
-            vocabulary: {
-                title: "Quiz Vocabolario",
+            alphabet2: {
+                title: "Quiz Alfabeto 2",
+                questions: [
+                    {
+                        question: "Questa forma 'تـ' è una 'ta':",
+                        character: "تـ",
+                        options: ["Isolata", "Mediana", "Finale", "Iniziale"],
+                        correct: 3
+                    },
+                    {
+                        question: "Questa forma 'ـم' è una 'mim':",
+                        character: "ـم",
+                        options: ["Isolata", "Iniziale", "Mediana", "Finale"],
+                        correct: 3
+                    },
+                    {
+                        question: "Quale forma di 'lam' si unisce solo a sinistra?",
+                        character: "ل",
+                        options: ["لـ", "-لـ", "-ل", "ل"],
+                        correct: 2
+                    }
+                ]
+            },
+            vocabulary1: {
+                title: "Quiz Vocabolario 1",
                 questions: [
                     {
                         question: "Cosa significa 'شكراً'?",
                         character: "شكراً",
                         options: ["Ciao", "Grazie", "Scusa", "Prego"],
                         correct: 1
+                    },
+                     {
+                        question: "Come si dice 'padre' in arabo?",
+                        character: "ab",
+                        options: ["أب", "أم", "أخ", "أخت"],
+                        correct: 0
                     }
                 ]
             },
-            numbers: {
-                title: "Quiz Numeri",
+            vocabulary2: {
+                title: "Quiz Vocabolario 2",
+                questions: [
+                    {
+                        question: "Qual è la traduzione di 'La pace sia con voi'?",
+                        character: "La pace sia con voi",
+                        options: ["صباح الخير", "مساء الخير", "السلام عليكم", "أهلاً وسهلاً"],
+                        correct: 2
+                    },
+                    {
+                        question: "Qual è la traduzione di 'Hummus'?",
+                        character: "Hummus",
+                        options: ["خبز", "حمص", "طعام", "ماء"],
+                        correct: 1
+                    }
+                ]
+            },
+            numbers1: {
+                title: "Quiz Numeri 1",
                 questions: [
                     {
                         question: "Come si dice 'uno' in arabo?",
                         character: "?",
                         options: ["اثنان", "واحد", "ثلاثة", "أربعة"],
                         correct: 1
+                    },
+                    {
+                        question: "Che numero è 'خمسة'?",
+                        character: "خمسة",
+                        options: ["3", "4", "5", "6"],
+                        correct: 2
+                    }
+                ]
+            },
+            numbers2: {
+                title: "Quiz Numeri 2",
+                questions: [
+                    {
+                        question: "Che numero è '٧'?",
+                        character: "٧",
+                        options: ["cinque", "sei", "sette", "otto"],
+                        correct: 2
+                    },
+                    {
+                        question: "Che numero è '١٠'?",
+                        character: "١٠",
+                        options: ["dieci", "cento", "mille", "zero"],
+                        correct: 0
                     }
                 ]
             }
