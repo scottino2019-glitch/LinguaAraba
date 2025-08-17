@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعلم العربية - Impara l'Arabo</title>
+    <title>🇸🇦 تعلم العربية - Impara l'Arabo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
         }
         
-        .arabic-text {
-            font-family: 'Noto Sans Arabic', sans-serif;
+        .arabic-font {
+            font-family: 'Amiri', serif;
             direction: rtl;
             text-align: right;
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #1a365d 0%, #2d5016 50%, #1a365d 100%);
+            background: linear-gradient(135deg, #059669 0%, #fbbf24 50%, #059669 100%);
         }
         
-        .arabic-bg {
-            background: linear-gradient(135deg, #2d5016 0%, #ffffff 25%, #68d391 50%, #ffffff 75%, #2d5016 100%);
+        .islamic-bg {
+            background: linear-gradient(135deg, #059669 0%, #fbbf24 25%, #059669 50%, #fbbf24 75%, #059669 100%);
         }
         
         .card-hover {
@@ -55,13 +56,13 @@
             100% { transform: scale(1); opacity: 1; }
         }
         
-        .floating-crescent {
-            animation: float 5s ease-in-out infinite;
+        .floating-element {
+            animation: float 4s ease-in-out infinite;
         }
         
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-18px) rotate(15deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
         }
         
         .golden-text {
@@ -79,18 +80,51 @@
                               radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 2px, transparent 2px);
             background-size: 40px 40px;
         }
+        
+        .pronunciation-badge {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 1px solid #f59e0b;
+        }
+        
+        .unlocked-badge {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border: 1px solid #10b981;
+            color: #065f46;
+        }
+        
+        .arabic-display {
+            font-size: 4rem;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .arabic-text {
+            direction: rtl;
+            text-align: right;
+        }
+        
+        .ltr-text {
+            direction: ltr;
+            text-align: left;
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-green-50 to-gray-50 min-h-screen">
+<body class="bg-gradient-to-br from-green-50 to-yellow-50 min-h-screen">
     <div id="app" class="container mx-auto px-4 py-8">
         <!-- Header -->
         <header class="text-center mb-12">
             <div class="gradient-bg text-white rounded-3xl p-8 mb-8 relative overflow-hidden islamic-pattern">
-                <div class="absolute top-4 right-4 text-4xl floating-crescent golden-text">☪️</div>
-                <div class="absolute bottom-4 left-4 text-3xl floating-crescent golden-text" style="animation-delay: -2s;">🕌</div>
-                <h1 class="text-5xl font-bold mb-4 arabic-text header-title">🇸🇦 تعلم العربية</h1>
-                <p class="text-xl opacity-95 header-title font-medium">Impara l'Arabo con Lezioni Interattive</p>
-                <p class="text-base opacity-85 mt-3 arabic-text header-title">أهلاً وسهلاً! مرحباً بكم!</p>
+                <div class="absolute top-4 right-4 text-4xl floating-element golden-text">🕌</div>
+                <div class="absolute bottom-4 left-4 text-3xl floating-element golden-text" style="animation-delay: -2s;">🌙</div>
+                <div class="absolute top-4 left-4 text-2xl floating-element golden-text" style="animation-delay: -1s;">⭐</div>
+                <div class="absolute bottom-4 right-4 text-2xl floating-element golden-text" style="animation-delay: -3s;">🕊️</div>
+                <h1 class="text-5xl font-bold mb-4 header-title arabic-font">🇸🇦 تعلم العربية</h1>
+                <p class="text-xl opacity-95 header-title font-medium">Impara l'Arabo Classico</p>
+                <p class="text-base opacity-85 mt-3 header-title arabic-font">أهلاً وسهلاً!</p>
+                <p class="text-sm opacity-75 mt-1 header-title">(Ahlan wa sahlan! - Benvenuto!)</p>
+                <div class="unlocked-badge rounded-full px-4 py-2 mt-4 inline-block">
+                    <span class="font-bold">اللغة العربية</span>
+                </div>
             </div>
         </header>
 
@@ -98,16 +132,16 @@
         <nav class="flex justify-center mb-8">
             <div class="bg-white rounded-full p-2 shadow-lg">
                 <button onclick="showSection('home')" class="nav-btn px-6 py-3 rounded-full font-medium transition-all duration-300 bg-green-600 text-white">
-                    🏠 الصفحة الرئيسية
+                    🏠 البيت (Home)
                 </button>
                 <button onclick="showSection('lessons')" class="nav-btn px-6 py-3 rounded-full font-medium transition-all duration-300 text-gray-600 hover:bg-green-100">
-                    📚 الدروس
+                    📚 الدروس (Lezioni)
                 </button>
                 <button onclick="showSection('exercises')" class="nav-btn px-6 py-3 rounded-full font-medium transition-all duration-300 text-gray-600 hover:bg-green-100">
-                    🎯 التمارين
+                    🎯 التمارين (Esercizi)
                 </button>
                 <button onclick="showSection('progress')" class="nav-btn px-6 py-3 rounded-full font-medium transition-all duration-300 text-gray-600 hover:bg-green-100">
-                    📊 التقدم
+                    📊 التقدم (Progressi)
                 </button>
             </div>
         </nav>
@@ -118,74 +152,84 @@
                 <!-- Quick Start Card -->
                 <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
                     <div class="text-4xl mb-4">🚀</div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">ابدأ الآن</h3>
-                    <p class="text-gray-600 mb-4">تعلم الأبجدية العربية</p>
-                    <button onclick="startLesson(1)" class="bg-gradient-to-r from-green-600 to-green-500 text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg transition-all">
-                        ابدأ
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 arabic-font">ابدأ التعلم</h3>
+                    <p class="text-sm text-gray-500 mb-2">(Inizia a Studiare)</p>
+                    <p class="text-gray-600 mb-4">Impara l'alfabeto e la pronuncia</p>
+                    <button onclick="startLesson(1)" class="bg-gradient-to-r from-green-600 to-yellow-500 text-white px-4 py-2 rounded-lg font-medium hover:shadow-lg transition-all">
+                        ابدأ (Inizia)
                     </button>
                 </div>
 
                 <!-- Progress Card -->
                 <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
                     <div class="text-4xl mb-4">📈</div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">تقدمك</h3>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 arabic-font">تقدم التعلم</h3>
+                    <p class="text-sm text-gray-500 mb-2">(Progresso di Studio)</p>
                     <div class="mb-4">
                         <div class="flex justify-between text-sm text-gray-600 mb-1">
-                            <span>مكتمل</span>
-                            <span id="progress-percent">25%</span>
+                            <span>مكتمل (Completato)</span>
+                            <span id="progress-percent">100%</span>
                         </div>
                         <div class="bg-gray-200 rounded-full h-2">
-                            <div id="progress-bar" class="bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full" style="width: 25%"></div>
+                            <div id="progress-bar" class="bg-gradient-to-r from-green-500 to-yellow-500 h-2 rounded-full" style="width: 100%"></div>
                         </div>
                     </div>
-                    <p class="text-sm text-gray-600">درسان مكتملان</p>
+                    <p class="text-sm text-gray-600">جميع الدروس متاحة!</p>
+                    <p class="text-xs text-gray-500">(Tutte le lezioni disponibili!)</p>
                 </div>
 
                 <!-- Daily Goal Card -->
                 <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
                     <div class="text-4xl mb-4">🎯</div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">الهدف اليومي</h3>
-                    <p class="text-gray-600 mb-4">20 دقيقة دراسة</p>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800 arabic-font">الهدف اليومي</h3>
+                    <p class="text-sm text-gray-500 mb-2">(Obiettivo Giornaliero)</p>
+                    <p class="text-gray-600 mb-4 arabic-font">٣٠ دقيقة دراسة</p>
+                    <p class="text-xs text-gray-500 mb-4">(30 minuti di studio)</p>
                     <div class="flex items-center">
-                        <div class="bg-yellow-400 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold mr-2">3</div>
-                        <span class="text-sm text-gray-600">أيام متتالية! 🔥</span>
+                        <div class="bg-yellow-400 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold mr-2">∞</div>
+                        <span class="text-sm text-gray-600">وصول غير محدود! 🔥</span>
                     </div>
                 </div>
             </div>
 
             <!-- Featured Lessons -->
             <div class="bg-white rounded-2xl p-8 shadow-lg">
-                <h2 class="text-2xl font-bold mb-6 text-gray-800">الدروس المميزة</h2>
+                <h2 class="text-2xl font-bold mb-6 text-gray-800 arabic-font">الدروس المقترحة</h2>
+                <p class="text-sm text-gray-500 mb-6">(Lezioni Consigliate)</p>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="border-2 border-green-200 rounded-xl p-6 hover:border-green-400 transition-all cursor-pointer" onclick="startLesson(1)">
                         <div class="flex items-center mb-4">
                             <div class="bg-green-100 rounded-full p-3 mr-4">
-                                <span class="text-2xl arabic-text">أ</span>
+                                <span class="text-2xl arabic-font">أ ب ت</span>
                             </div>
                             <div>
-                                <h3 class="font-bold text-lg">الأبجدية العربية</h3>
-                                <p class="text-gray-600 text-sm">تعلم الحروف العربية الأساسية</p>
+                                <h3 class="font-bold text-lg arabic-font">الأبجدية العربية</h3>
+                                <p class="text-sm text-green-600 mb-1">(L'Alfabeto Arabo)</p>
+                                <p class="text-gray-600 text-sm">تعلم الحروف العربية الـ28</p>
+                                <p class="text-xs text-gray-500">(Impara le 28 lettere arabe)</p>
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">مبتدئ</span>
-                            <span class="text-green-600 font-medium">22 دقيقة</span>
+                            <span class="unlocked-badge px-3 py-1 rounded-full text-sm font-bold">متاح</span>
+                            <span class="text-green-600 font-medium arabic-font">٢٥ دقيقة</span>
                         </div>
                     </div>
 
-                    <div class="border-2 border-blue-200 rounded-xl p-6 hover:border-blue-400 transition-all cursor-pointer" onclick="startLesson(2)">
+                    <div class="border-2 border-yellow-200 rounded-xl p-6 hover:border-yellow-400 transition-all cursor-pointer" onclick="startLesson(2)">
                         <div class="flex items-center mb-4">
-                            <div class="bg-blue-100 rounded-full p-3 mr-4">
-                                <span class="text-2xl arabic-text">مرحبا</span>
+                            <div class="bg-yellow-100 rounded-full p-3 mr-4">
+                                <span class="text-2xl">👋</span>
                             </div>
                             <div>
-                                <h3 class="font-bold text-lg">الكلمات الأولى</h3>
-                                <p class="text-gray-600 text-sm">اكتشف الكلمات العربية الأساسية</p>
+                                <h3 class="font-bold text-lg arabic-font">التحيات</h3>
+                                <p class="text-sm text-yellow-600 mb-1">(Saluti)</p>
+                                <p class="text-gray-600 text-sm arabic-font">التحيات الأساسية والأدب</p>
+                                <p class="text-xs text-gray-500">(Saluti di base e cortesia)</p>
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">متوسط</span>
-                            <span class="text-blue-600 font-medium">18 دقيقة</span>
+                            <span class="unlocked-badge px-3 py-1 rounded-full text-sm font-bold">متاح</span>
+                            <span class="text-yellow-600 font-medium arabic-font">٢٠ دقيقة</span>
                         </div>
                     </div>
                 </div>
@@ -195,94 +239,153 @@
         <!-- Lessons Section -->
         <div id="lessons-section" class="section hidden">
             <div class="bg-white rounded-2xl p-8 shadow-lg">
-                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">📚 دروس اللغة العربية</h2>
+                <h2 class="text-3xl font-bold mb-4 text-center text-gray-800 arabic-font">📚 دروس العربية</h2>
+                <p class="text-center text-gray-500 mb-8">(Lezioni di Arabo)</p>
                 
                 <div class="grid gap-6">
-                    <!-- LEZIONI ESISTENTI - Puoi modificare queste o usarle come template -->
-                    
                     <!-- Lesson 1 -->
                     <div class="border-2 border-green-200 rounded-xl p-6 card-hover cursor-pointer" onclick="startLesson(1)">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
                                 <div class="bg-green-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">1</div>
                                 <div>
-                                    <h3 class="text-xl font-bold arabic-text">الأبجدية العربية - Alfabeto Arabo</h3>
-                                    <p class="text-gray-600">أ، ب، ت، ث، ج، ح، خ، د، ذ، ر، ز، س، ش، ص، ض، ط، ظ، ع، غ، ف، ق، ك، ل، م، ن، ه، و، ي</p>
+                                    <h3 class="text-xl font-bold arabic-font">الأبجدية العربية - L'Alfabeto Arabo</h3>
+                                    <p class="text-gray-600 arabic-font">أ ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي</p>
+                                    <p class="text-sm text-gray-500">Le 28 lettere dell'alfabeto arabo</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm mb-2">مكتمل ✓</div>
-                                <span class="text-green-600 font-medium">22 دقيقة</span>
+                                <div class="unlocked-badge px-3 py-1 rounded-full text-sm mb-2 font-bold"> متاح</div>
+                                <span class="text-green-600 font-medium arabic-font">٢٥ دقيقة</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Lesson 2 -->
-                    <div class="border-2 border-blue-200 rounded-xl p-6 card-hover cursor-pointer" onclick="startLesson(2)">
+                    <div class="border-2 border-yellow-200 rounded-xl p-6 card-hover cursor-pointer" onclick="startLesson(2)">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
-                                <div class="bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">2</div>
+                                <div class="bg-yellow-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">2</div>
                                 <div>
-                                    <h3 class="text-xl font-bold arabic-text">الكلمات الأولى - Prime Parole</h3>
-                                    <p class="text-gray-600">مرحبا، شكرا، نعم، لا، من فضلك</p>
+                                    <h3 class="text-xl font-bold arabic-font">التحيات - Saluti</h3>
+                                    <p class="text-gray-600 arabic-font">السلام عليكم، أهلاً وسهلاً، شكراً، عفواً</p>
+                                    <p class="text-sm text-gray-500">Saluti e espressioni di cortesia essenziali</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm mb-2">جاري</div>
-                                <span class="text-blue-600 font-medium">18 دقيقة</span>
+                                <div class="unlocked-badge px-3 py-1 rounded-full text-sm mb-2 font-bold"> متاح</div>
+                                <span class="text-yellow-600 font-medium arabic-font">٢٠ دقيقة</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Lesson 3 -->
-                    <div class="border-2 border-gray-200 rounded-xl p-6 card-hover opacity-75">
+                    <div class="border-2 border-blue-200 rounded-xl p-6 card-hover cursor-pointer" onclick="startLesson(3)">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
-                                <div class="bg-gray-400 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">3</div>
+                                <div class="bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">3</div>
                                 <div>
-                                    <h3 class="text-xl font-bold arabic-text">الأرقام - Numeri</h3>
-                                    <p class="text-gray-600">واحد، اثنان، ثلاثة، أربعة، خمسة، ستة، سبعة، ثمانية، تسعة، عشرة</p>
+                                    <h3 class="text-xl font-bold arabic-font">الأرقام - Numeri</h3>
+                                    <p class="text-gray-600 arabic-font">واحد، اثنان، ثلاثة، أربعة، خمسة، ستة، سبعة، ثمانية، تسعة، عشرة</p>
+                                    <p class="text-sm text-gray-500">Numeri da 1 a 100 in arabo</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm mb-2">مقفل 🔒</div>
-                                <span class="text-gray-500 font-medium">25 دقيقة</span>
+                                <div class="unlocked-badge px-3 py-1 rounded-full text-sm mb-2 font-bold"> متاح</div>
+                                <span class="text-blue-600 font-medium arabic-font">٣٠ دقيقة</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 
-                    ========================================
-                    🎯 AGGIUNGI NUOVE LEZIONI QUI SOTTO! 
-                    ========================================
-                    
-                    TEMPLATE PER NUOVA LEZIONE:
-                    Copia questo codice e modifica:
-                    - Numero della lezione (4, 5, 6...)
-                    - Colore del bordo (border-purple-200, border-orange-200...)
-                    - Colore del cerchio (bg-purple-500, bg-orange-500...)
-                    - Titolo in arabo e italiano
-                    - Descrizione del contenuto
-                    - Stato (مكتمل, جاري, مقفل)
-                    - Durata stimata
-                    
+                    <!-- Lesson 4 -->
                     <div class="border-2 border-purple-200 rounded-xl p-6 card-hover cursor-pointer" onclick="startLesson(4)">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
                                 <div class="bg-purple-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">4</div>
                                 <div>
-                                    <h3 class="text-xl font-bold arabic-text">الألوان - Colori</h3>
-                                    <p class="text-gray-600">أحمر، أزرق، أخضر، أصفر، أسود، أبيض</p>
+                                    <h3 class="text-xl font-bold arabic-font">الألوان - Colori</h3>
+                                    <p class="text-gray-600 arabic-font">أحمر، أزرق، أصفر، أخضر، أسود، أبيض</p>
+                                    <p class="text-sm text-gray-500">Tutti i colori principali in arabo</p>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm mb-2">مقفل 🔒</div>
-                                <span class="text-gray-500 font-medium">20 دقيقة</span>
+                                <div class="unlocked-badge px-3 py-1 rounded-full text-sm mb-2 font-bold"> متاح</div>
+                                <span class="text-purple-600 font-medium arabic-font">١٨ دقيقة</span>
                             </div>
                         </div>
                     </div>
-                    -->
-                    
+
+                    <!-- Lesson 5 -->
+                    <div class="border-2 border-red-200 rounded-xl p-6 card-hover cursor-pointer" onclick="startLesson(5)">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="bg-red-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">5</div>
+                                <div>
+                                    <h3 class="text-xl font-bold arabic-font">العائلة - Famiglia</h3>
+                                    <p class="text-gray-600 arabic-font">أم، أب، أخ، أخت، جد، جدة، ابن، ابنة</p>
+                                    <p class="text-sm text-gray-500">Membri della famiglia e relazioni</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="unlocked-badge px-3 py-1 rounded-full text-sm mb-2 font-bold"> متاح</div>
+                                <span class="text-red-600 font-medium arabic-font">٢٥ دقيقة</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 6 -->
+                    <div class="border-2 border-orange-200 rounded-xl p-6 card-hover cursor-pointer" onclick="startLesson(6)">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="bg-orange-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">6</div>
+                                <div>
+                                    <h3 class="text-xl font-bold arabic-font">الطعام - Cibo</h3>
+                                    <p class="text-gray-600 arabic-font">أرز، خبز، ماء، شاي، لحم، سمك، فاكهة</p>
+                                    <p class="text-sm text-gray-500">Cibi e bevande essenziali</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="unlocked-badge px-3 py-1 rounded-full text-sm mb-2 font-bold"> متاح</div>
+                                <span class="text-orange-600 font-medium arabic-font">٢٢ دقيقة</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 7 -->
+                    <div class="border-2 border-indigo-200 rounded-xl p-6 card-hover cursor-pointer" onclick="startLesson(7)">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="bg-indigo-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">7</div>
+                                <div>
+                                    <h3 class="text-xl font-bold arabic-font">الوقت - Tempo</h3>
+                                    <p class="text-gray-600 arabic-font">اليوم، غداً، أمس، ساعة، دقيقة، أسبوع</p>
+                                    <p class="text-sm text-gray-500">Espressioni di tempo e calendario</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="unlocked-badge px-3 py-1 rounded-full text-sm mb-2 font-bold"> متاح</div>
+                                <span class="text-indigo-600 font-medium arabic-font">٢٨ دقيقة</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson 8 -->
+                    <div class="border-2 border-teal-200 rounded-xl p-6 card-hover cursor-pointer" onclick="startLesson(8)">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="bg-teal-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold mr-4">8</div>
+                                <div>
+                                    <h3 class="text-xl font-bold arabic-font">الأفعال - Verbi</h3>
+                                    <p class="text-gray-600 arabic-font">يأتي، يذهب، يفعل، يكون، يأكل، يشرب، يرى</p>
+                                    <p class="text-sm text-gray-500">Verbi essenziali e uso base</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="unlocked-badge px-3 py-1 rounded-full text-sm mb-2 font-bold"> متاح</div>
+                                <span class="text-teal-600 font-medium arabic-font">٣٥ دقيقة</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -290,26 +393,31 @@
         <!-- Exercises Section -->
         <div id="exercises-section" class="section hidden">
             <div class="bg-white rounded-2xl p-8 shadow-lg">
-                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">🎯 تمارين تفاعلية</h2>
+                <h2 class="text-3xl font-bold mb-4 text-center text-gray-800 arabic-font">🎯 التمارين التفاعلية</h2>
+                <p class="text-center text-gray-500 mb-8">(Esercizi Interattivi)</p>
                 
                 <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="arabic-bg rounded-xl p-6 card-hover cursor-pointer" onclick="startExercise('matching')">
-                        <div class="text-4xl mb-4">🔗</div>
-                        <h3 class="text-xl font-bold mb-2">ربط الحروف</h3>
-                        <p class="text-gray-600 mb-4">اربط الحروف العربية بأصواتها</p>
+                    <div class="islamic-bg rounded-xl p-6 card-hover cursor-pointer" onclick="startExercise('arabic')">
+                        <div class="text-4xl mb-4">📝</div>
+                        <h3 class="text-xl font-bold mb-2 arabic-font">تمييز الحروف</h3>
+                        <p class="text-sm text-green-600 mb-2">(Riconoscimento Lettere)</p>
+                        <p class="text-gray-600 mb-4 arabic-font">تمييز الحروف العربية ومطابقة المعاني</p>
+                        <p class="text-xs text-gray-500 mb-4">(Riconosci le lettere arabe e abbina i significati)</p>
                         <div class="flex justify-between items-center">
-                            <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">14 سؤال</span>
-                            <span class="text-green-600 font-medium">7 دقائق</span>
+                            <span class="unlocked-badge px-3 py-1 rounded-full text-sm font-bold"> متاح</span>
+                            <span class="text-green-600 font-medium arabic-font">١٥ دقيقة</span>
                         </div>
                     </div>
 
-                    <div class="bg-gradient-to-br from-blue-100 to-cyan-100 rounded-xl p-6 card-hover cursor-pointer" onclick="startExercise('pronunciation')">
+                    <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 card-hover cursor-pointer" onclick="startExercise('pronunciation')">
                         <div class="text-4xl mb-4">🎵</div>
-                        <h3 class="text-xl font-bold mb-2">النطق</h3>
-                        <p class="text-gray-600 mb-4">استمع وكرر الأصوات العربية</p>
+                        <h3 class="text-xl font-bold mb-2 arabic-font">تمرين النطق</h3>
+                        <p class="text-sm text-yellow-600 mb-2">(Pratica Pronuncia)</p>
+                        <p class="text-gray-600 mb-4 arabic-font">تمرين نطق الحروف العربية</p>
+                        <p class="text-xs text-gray-500 mb-4">(Pratica la pronuncia delle lettere arabe)</p>
                         <div class="flex justify-between items-center">
-                            <span class="bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm">16 صوت</span>
-                            <span class="text-blue-600 font-medium">12 دقيقة</span>
+                            <span class="unlocked-badge px-3 py-1 rounded-full text-sm font-bold"> متاح</span>
+                            <span class="text-yellow-600 font-medium arabic-font">٢٠ دقيقة</span>
                         </div>
                     </div>
                 </div>
@@ -317,33 +425,39 @@
                 <!-- Sample Exercise -->
                 <div id="exercise-area" class="bg-gray-50 rounded-xl p-8">
                     <div class="text-center">
-                        <h3 class="text-2xl font-bold mb-6 text-gray-800">تمرين: تعرف على الحرف</h3>
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800 arabic-font">تمرين: تمييز الكلمات</h3>
+                        <p class="text-sm text-gray-500 mb-6">(Esercizio: Riconoscimento Parole)</p>
                         <div class="bg-white rounded-xl p-8 mb-6 shadow-inner">
-                            <div class="text-8xl arabic-text mb-6 pulse-animation text-green-600" id="exercise-character">ع</div>
-                            <p class="text-lg text-gray-600 mb-8">كيف ينطق هذا الحرف العربي؟</p>
+                            <div class="arabic-display mb-4 pulse-animation text-green-600 arabic-font" id="exercise-arabic">السلام عليكم</div>
+                            <div class="pronunciation-badge rounded-full px-4 py-2 mb-6 inline-block">
+                                <span class="font-bold text-amber-800" id="exercise-pronunciation">as-salāmu ʿalaykum</span>
+                            </div>
+                            <p class="text-lg text-gray-600 mb-8 arabic-font">ما معنى هذه الكلمة العربية؟</p>
+                            <p class="text-sm text-gray-500 mb-8">(Cosa significa questa parola araba?)</p>
                             
                             <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
-                                <button onclick="checkAnswer('ayn')" class="exercise-option bg-green-100 hover:bg-green-200 text-green-800 py-4 px-6 rounded-xl font-medium transition-all">
-                                    'AYN (gutturale)
+                                <button onclick="checkAnswer('pace')" class="exercise-option bg-green-100 hover:bg-green-200 text-green-800 py-4 px-6 rounded-xl font-medium transition-all">
+                                    Pace su di voi
                                 </button>
-                                <button onclick="checkAnswer('alif')" class="exercise-option bg-blue-100 hover:bg-blue-200 text-blue-800 py-4 px-6 rounded-xl font-medium transition-all">
-                                    ALIF (A)
+                                <button onclick="checkAnswer('grazie')" class="exercise-option bg-blue-100 hover:bg-blue-200 text-blue-800 py-4 px-6 rounded-xl font-medium transition-all">
+                                    Grazie
                                 </button>
-                                <button onclick="checkAnswer('ha')" class="exercise-option bg-orange-100 hover:bg-orange-200 text-orange-800 py-4 px-6 rounded-xl font-medium transition-all">
-                                    HA (H)
+                                <button onclick="checkAnswer('arrivederci')" class="exercise-option bg-yellow-100 hover:bg-yellow-200 text-yellow-800 py-4 px-6 rounded-xl font-medium transition-all">
+                                    Arrivederci
                                 </button>
-                                <button onclick="checkAnswer('kha')" class="exercise-option bg-purple-100 hover:bg-purple-200 text-purple-800 py-4 px-6 rounded-xl font-medium transition-all">
-                                    KHA (aspirata)
+                                <button onclick="checkAnswer('prego')" class="exercise-option bg-purple-100 hover:bg-purple-200 text-purple-800 py-4 px-6 rounded-xl font-medium transition-all">
+                                    Prego
                                 </button>
                             </div>
                         </div>
                         
                         <div id="exercise-feedback" class="hidden">
                             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl mb-4">
-                                <strong>صحيح! 🎉</strong> ع si pronuncia 'AYN (suono gutturale)
+                                <strong>صحيح! 🎉</strong> "السلام عليكم" significa "Pace su di voi" (saluto islamico)
+                                <br><span class="text-sm">(Corretto! "السلام عليكم" vuol dire "Pace su di voi")</span>
                             </div>
-                            <button onclick="nextExercise()" class="bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all">
-                                السؤال التالي →
+                            <button onclick="nextExercise()" class="bg-gradient-to-r from-green-500 to-yellow-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all">
+                                السؤال التالي ← (Prossima Domanda)
                             </button>
                         </div>
                     </div>
@@ -354,159 +468,133 @@
         <!-- Progress Section -->
         <div id="progress-section" class="section hidden">
             <div class="bg-white rounded-2xl p-8 shadow-lg">
-                <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">📊 حالة التقدم</h2>
+                <h2 class="text-3xl font-bold mb-4 text-center text-gray-800 arabic-font">📊 تقدم التعلم</h2>
+                <p class="text-center text-gray-500 mb-8">(Stato dei Progressi)</p>
                 
                 <div class="grid md:grid-cols-3 gap-6 mb-8">
                     <div class="text-center">
                         <div class="bg-gradient-to-br from-green-600 to-green-500 text-white rounded-2xl p-6">
-                            <div class="text-3xl font-bold">2</div>
-                            <div class="text-sm opacity-90">دروس مكتملة</div>
+                            <div class="text-3xl font-bold">8</div>
+                            <div class="text-sm opacity-90 arabic-font">الدروس المكتملة</div>
+                            <div class="text-xs opacity-75">(Lezioni Completate)</div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <div class="bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-2xl p-6">
-                            <div class="text-3xl font-bold">14</div>
-                            <div class="text-sm opacity-90">حروف متعلمة</div>
+                        <div class="bg-gradient-to-br from-yellow-500 to-green-500 text-white rounded-2xl p-6">
+                            <div class="text-3xl font-bold">150+</div>
+                            <div class="text-sm opacity-90 arabic-font">الكلمات المتعلمة</div>
+                            <div class="text-xs opacity-75">(Parole Imparate)</div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <div class="bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-2xl p-6">
-                            <div class="text-3xl font-bold">3</div>
-                            <div class="text-sm opacity-90">أيام متتالية</div>
+                        <div class="bg-gradient-to-br from-orange-500 to-yellow-500 text-white rounded-2xl p-6">
+                            <div class="text-3xl font-bold">∞</div>
+                            <div class="text-sm opacity-90 arabic-font">وصول غير محدود</div>
+                            <div class="text-xs opacity-75">(Accesso Illimitato)</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6">
-                    <h3 class="text-xl font-bold mb-4 text-green-700">الحروف العربية المتعلمة</h3>
-                    <div class="grid grid-cols-7 gap-3 mb-4">
-                        <div class="bg-green-100 border-2 border-green-400 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">أ</div>
-                            <div class="text-xs text-green-700 mt-1">✓</div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Alphabet Progress -->
+                    <div class="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl p-6">
+                        <h3 class="text-xl font-bold mb-2 text-green-700 arabic-font">إتقان الأبجدية</h3>
+                        <p class="text-sm text-green-600 mb-4">(Padronanza Alfabeto)</p>
+                        <div class="grid grid-cols-7 gap-1 mb-4 text-center">
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">أ</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ب</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ت</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ث</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ج</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ح</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">خ</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">د</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ذ</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ر</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ز</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">س</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ش</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ص</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ض</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ط</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ظ</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ع</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">غ</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ف</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ق</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ك</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ل</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">م</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ن</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ه</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">و</div>
+                            <div class="bg-green-100 border border-green-400 rounded p-2 text-xs arabic-font">ي</div>
                         </div>
-                        <div class="bg-green-100 border-2 border-green-400 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ب</div>
-                            <div class="text-xs text-green-700 mt-1">✓</div>
-                        </div>
-                        <div class="bg-green-100 border-2 border-green-400 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ت</div>
-                            <div class="text-xs text-green-700 mt-1">✓</div>
-                        </div>
-                        <div class="bg-green-100 border-2 border-green-400 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ث</div>
-                            <div class="text-xs text-green-700 mt-1">✓</div>
-                        </div>
-                        <div class="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ج</div>
-                            <div class="text-xs text-yellow-700 mt-1">~</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ح</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">خ</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
+                        <p class="text-sm text-gray-600 arabic-font">جميع الحروف الـ28 متقنة!</p>
+                        <p class="text-xs text-gray-500">(Tutte le 28 lettere padroneggiate!)</p>
                     </div>
-                    
-                    <div class="grid grid-cols-7 gap-3 mb-4">
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">د</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
+
+                    <!-- Vocabulary Progress -->
+                    <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6">
+                        <h3 class="text-xl font-bold mb-2 text-yellow-700 arabic-font">المفردات</h3>
+                        <p class="text-sm text-yellow-600 mb-4">(Vocabolario)</p>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm arabic-font">التحيات</span>
+                                <div class="flex items-center">
+                                    <div class="bg-green-200 rounded-full h-2 w-16 mr-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                    <span class="text-xs text-green-600">12/12</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm arabic-font">الأرقام</span>
+                                <div class="flex items-center">
+                                    <div class="bg-green-200 rounded-full h-2 w-16 mr-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                    <span class="text-xs text-green-600">20/20</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm arabic-font">الألوان</span>
+                                <div class="flex items-center">
+                                    <div class="bg-green-200 rounded-full h-2 w-16 mr-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                    <span class="text-xs text-green-600">10/10</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm arabic-font">العائلة</span>
+                                <div class="flex items-center">
+                                    <div class="bg-green-200 rounded-full h-2 w-16 mr-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                    <span class="text-xs text-green-600">15/15</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm arabic-font">الطعام</span>
+                                <div class="flex items-center">
+                                    <div class="bg-green-200 rounded-full h-2 w-16 mr-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                    <span class="text-xs text-green-600">18/18</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ذ</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ر</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ز</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">س</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ش</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ص</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
+                        <p class="text-sm text-gray-600 mt-4 arabic-font">المجموع: ١٥٠+ كلمة متعلمة!</p>
+                        <p class="text-xs text-gray-500">(Totale: 150+ parole imparate!)</p>
                     </div>
-                    
-                    <div class="grid grid-cols-7 gap-3 mb-4">
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ض</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ط</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ظ</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ع</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">غ</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ف</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ق</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-7 gap-3 mb-4">
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ك</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ل</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">م</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ن</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ه</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">و</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                        <div class="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center">
-                            <div class="text-2xl arabic-text">ي</div>
-                            <div class="text-xs text-gray-500 mt-1">○</div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4 text-sm text-gray-600">
-                        <span class="inline-block w-3 h-3 bg-green-400 rounded-full mr-2"></span>متعلم
-                        <span class="inline-block w-3 h-3 bg-yellow-400 rounded-full mr-2 ml-4"></span>جاري
-                        <span class="inline-block w-3 h-3 bg-gray-300 rounded-full mr-2 ml-4"></span>للتعلم
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <div class="unlocked-badge rounded-full px-6 py-3 inline-block">
+                        <span class="font-bold text-lg arabic-font">🎉 جميع المحتويات متاحة! 🎉</span>
+                        <br>
+                        <span class="text-sm">(Tutto il contenuto è sbloccato!)</span>
                     </div>
                 </div>
             </div>
@@ -543,105 +631,266 @@
 
         // Lesson functions
         function startLesson(lessonNumber) {
-            // Show lesson content based on lesson number
-            
-            /* 
-            ========================================
-            🎯 AGGIUNGI NUOVE LEZIONI QUI SOTTO!
-            ========================================
-            
-            Per aggiungere una nuova lezione:
-            1. Aggiungi un nuovo "else if" con il numero della lezione
-            2. Chiama showLessonContent() con:
-               - Titolo della lezione
-               - Descrizione breve
-               - Array di caratteri con: char, sound, example
-            
-            Esempio per Lezione 4:
-            } else if (lessonNumber === 4) {
-                showLessonContent('الألوان (Colori)', 'أحمر، أزرق، أخضر، أصفر، أسود، أبيض', [
-                    {char: 'أحمر', sound: 'AHMAR', example: 'أحمر (rosso)'},
-                    {char: 'أزرق', sound: 'AZRAQ', example: 'أزرق (blu)'},
-                    {char: 'أخضر', sound: 'AKHDAR', example: 'أخضر (verde)'},
-                    {char: 'أصفر', sound: 'ASFAR', example: 'أصفر (giallo)'},
-                    {char: 'أسود', sound: 'ASWAD', example: 'أسود (nero)'}
-                ]);
-            */
-            
-            if (lessonNumber === 1) {
-                showLessonContent('الأبجدية العربية', 'أ، ب، ت، ث، ج، ح، خ، د، ذ، ر، ز، س، ش، ص، ض، ط، ظ، ع، غ، ف، ق، ك، ل، م، ن، ه، و، ي', [
-                    {char: 'أ', sound: 'ALIF', example: 'أب (padre)'},
-                    {char: 'ب', sound: 'BA', example: 'بيت (casa)'},
-                    {char: 'ت', sound: 'TA', example: 'تفاح (mela)'},
-                    {char: 'ث', sound: 'THA', example: 'ثلج (neve)'},
-                    {char: 'ج', sound: 'JIM', example: 'جمل (cammello)'},
-                    {char: 'ح', sound: 'HA', example: 'حب (amore)'},
-                    {char: 'خ', sound: 'KHA', example: 'خبز (pane)'},
-                    {char: 'د', sound: 'DAL', example: 'دار (casa)'},
-                    {char: 'ذ', sound: 'DHAL', example: 'ذهب (oro)'},
-                    {char: 'ر', sound: 'RA', example: 'رجل (uomo)'},
-                    {char: 'ز', sound: 'ZAYN', example: 'زهرة (fiore)'},
-                    {char: 'س', sound: 'SIN', example: 'سمك (pesce)'},
-                    {char: 'ش', sound: 'SHIN', example: 'شمس (sole)'},
-                    {char: 'ص', sound: 'SAD', example: 'صباح (mattina)'},
-                    {char: 'ض', sound: 'DAD', example: 'ضوء (luce)'},
-                    {char: 'ط', sound: 'TA', example: 'طائر (uccello)'},
-                    {char: 'ظ', sound: 'ZA', example: 'ظل (ombra)'},
-                    {char: 'ع', sound: 'AYN', example: 'عين (occhio)'},
-                    {char: 'غ', sound: 'GHAYN', example: 'غابة (foresta)'},
-                    {char: 'ف', sound: 'FA', example: 'فيل (elefante)'},
-                    {char: 'ق', sound: 'QAF', example: 'قلم (penna)'},
-                    {char: 'ك', sound: 'KAF', example: 'كتاب (libro)'},
-                    {char: 'ل', sound: 'LAM', example: 'ليل (notte)'},
-                    {char: 'م', sound: 'MIM', example: 'ماء (acqua)'},
-                    {char: 'ن', sound: 'NUN', example: 'نار (fuoco)'},
-                    {char: 'ه', sound: 'HA', example: 'هواء (aria)'},
-                    {char: 'و', sound: 'WAW', example: 'ورد (rosa)'},
-                    {char: 'ي', sound: 'YA', example: 'يد (mano)'}
-                ]);
-            } else if (lessonNumber === 2) {
-                showLessonContent('الكلمات الأولى', 'مرحبا، شكرا، نعم، لا، من فضلك', [
-                    {char: 'مرحبا', sound: 'MAR-ha-ban', example: 'مرحبا (Ciao!)'},
-                    {char: 'شكرا', sound: 'SHUK-ran', example: 'شكرا (Grazie)'},
-                    {char: 'نعم', sound: 'NA-am', example: 'نعم (Sì)'},
-                    {char: 'لا', sound: 'LA', example: 'لا (No)'},
-                    {char: 'من فضلك', sound: 'min FAD-lik', example: 'من فضلك (Per favore)'},
-                    {char: 'أهلا وسهلا', sound: 'AH-lan wa SAH-lan', example: 'أهلا وسهلا (Benvenuto)'}
-                ]);
+            const lessons = {
+                1: {
+                    title: 'الأبجدية العربية (L\'Alfabeto Arabo)',
+                    description: 'الحروف العربية الـ28 - Le 28 lettere dell\'alfabeto arabo',
+                    content: [
+                        {arabic: 'أ', name: 'ألف', pronunciation: 'alif', italian: 'A'},
+                        {arabic: 'ب', name: 'باء', pronunciation: 'bāʾ', italian: 'B'},
+                        {arabic: 'ت', name: 'تاء', pronunciation: 'tāʾ', italian: 'T'},
+                        {arabic: 'ث', name: 'ثاء', pronunciation: 'thāʾ', italian: 'Th'},
+                        {arabic: 'ج', name: 'جيم', pronunciation: 'jīm', italian: 'J'},
+                        {arabic: 'ح', name: 'حاء', pronunciation: 'ḥāʾ', italian: 'Ḥ'},
+                        {arabic: 'خ', name: 'خاء', pronunciation: 'khāʾ', italian: 'Kh'},
+                        {arabic: 'د', name: 'دال', pronunciation: 'dāl', italian: 'D'},
+                        {arabic: 'ذ', name: 'ذال', pronunciation: 'dhāl', italian: 'Dh'},
+                        {arabic: 'ر', name: 'راء', pronunciation: 'rāʾ', italian: 'R'},
+                        {arabic: 'ز', name: 'زاي', pronunciation: 'zāy', italian: 'Z'},
+                        {arabic: 'س', name: 'سين', pronunciation: 'sīn', italian: 'S'},
+                        {arabic: 'ش', name: 'شين', pronunciation: 'shīn', italian: 'Sh'},
+                        {arabic: 'ص', name: 'صاد', pronunciation: 'ṣād', italian: 'Ṣ'},
+                        {arabic: 'ض', name: 'ضاد', pronunciation: 'ḍād', italian: 'Ḍ'},
+                        {arabic: 'ط', name: 'طاء', pronunciation: 'ṭāʾ', italian: 'Ṭ'},
+                        {arabic: 'ظ', name: 'ظاء', pronunciation: 'ẓāʾ', italian: 'Ẓ'},
+                        {arabic: 'ع', name: 'عين', pronunciation: 'ʿayn', italian: 'ʿ'},
+                        {arabic: 'غ', name: 'غين', pronunciation: 'ghayn', italian: 'Gh'},
+                        {arabic: 'ف', name: 'فاء', pronunciation: 'fāʾ', italian: 'F'},
+                        {arabic: 'ق', name: 'قاف', pronunciation: 'qāf', italian: 'Q'},
+                        {arabic: 'ك', name: 'كاف', pronunciation: 'kāf', italian: 'K'},
+                        {arabic: 'ل', name: 'لام', pronunciation: 'lām', italian: 'L'},
+                        {arabic: 'م', name: 'ميم', pronunciation: 'mīm', italian: 'M'},
+                        {arabic: 'ن', name: 'نون', pronunciation: 'nūn', italian: 'N'},
+                        {arabic: 'ه', name: 'هاء', pronunciation: 'hāʾ', italian: 'H'},
+                        {arabic: 'و', name: 'واو', pronunciation: 'wāw', italian: 'W'},
+                        {arabic: 'ي', name: 'ياء', pronunciation: 'yāʾ', italian: 'Y'}
+                    ]
+                },
+                2: {
+                    title: 'التحيات (Saluti)',
+                    description: 'التحيات الأساسية والأدب - Saluti di base e espressioni di cortesia',
+                    content: [
+                        {arabic: 'السلام عليكم', pronunciation: 'as-salāmu ʿalaykum', italian: 'Pace su di voi (saluto)'},
+                        {arabic: 'وعليكم السلام', pronunciation: 'wa ʿalaykumu s-salām', italian: 'E su di voi la pace (risposta)'},
+                        {arabic: 'أهلاً وسهلاً', pronunciation: 'ahlan wa sahlan', italian: 'Benvenuto'},
+                        {arabic: 'مرحباً', pronunciation: 'marḥaban', italian: 'Ciao'},
+                        {arabic: 'صباح الخير', pronunciation: 'ṣabāḥ al-khayr', italian: 'Buongiorno'},
+                        {arabic: 'صباح النور', pronunciation: 'ṣabāḥ an-nūr', italian: 'Buongiorno (risposta)'},
+                        {arabic: 'مساء الخير', pronunciation: 'masāʾ al-khayr', italian: 'Buonasera'},
+                        {arabic: 'مساء النور', pronunciation: 'masāʾ an-nūr', italian: 'Buonasera (risposta)'},
+                        {arabic: 'تصبح على خير', pronunciation: 'tuṣbiḥ ʿalā khayr', italian: 'Buonanotte'},
+                        {arabic: 'شكراً', pronunciation: 'shukran', italian: 'Grazie'},
+                        {arabic: 'عفواً', pronunciation: 'ʿafwan', italian: 'Prego'},
+                        {arabic: 'آسف', pronunciation: 'āsif', italian: 'Mi dispiace'},
+                        {arabic: 'مع السلامة', pronunciation: 'maʿa s-salāma', italian: 'Arrivederci'}
+                    ]
+                },
+                3: {
+                    title: 'الأرقام (Numeri)',
+                    description: 'الأرقام العربية ١-١٠٠ - Numeri arabi 1-100',
+                    content: [
+                        {arabic: 'واحد', pronunciation: 'wāḥid', italian: 'Uno', number: '١'},
+                        {arabic: 'اثنان', pronunciation: 'ithnān', italian: 'Due', number: '٢'},
+                        {arabic: 'ثلاثة', pronunciation: 'thalātha', italian: 'Tre', number: '٣'},
+                        {arabic: 'أربعة', pronunciation: 'arbaʿa', italian: 'Quattro', number: '٤'},
+                        {arabic: 'خمسة', pronunciation: 'khamsa', italian: 'Cinque', number: '٥'},
+                        {arabic: 'ستة', pronunciation: 'sitta', italian: 'Sei', number: '٦'},
+                        {arabic: 'سبعة', pronunciation: 'sabʿa', italian: 'Sette', number: '٧'},
+                        {arabic: 'ثمانية', pronunciation: 'thamāniya', italian: 'Otto', number: '٨'},
+                        {arabic: 'تسعة', pronunciation: 'tisʿa', italian: 'Nove', number: '٩'},
+                        {arabic: 'عشرة', pronunciation: 'ʿashara', italian: 'Dieci', number: '١٠'},
+                        {arabic: 'عشرون', pronunciation: 'ʿishrūn', italian: 'Venti', number: '٢٠'},
+                        {arabic: 'ثلاثون', pronunciation: 'thalāthūn', italian: 'Trenta', number: '٣٠'},
+                        {arabic: 'خمسون', pronunciation: 'khamsūn', italian: 'Cinquanta', number: '٥٠'},
+                        {arabic: 'مائة', pronunciation: 'miʾa', italian: 'Cento', number: '١٠٠'}
+                    ]
+                },
+                4: {
+                    title: 'الألوان (Colori)',
+                    description: 'الألوان الأساسية بالعربية - Colori di base in arabo',
+                    content: [
+                        {arabic: 'أحمر', pronunciation: 'aḥmar', italian: 'Rosso', color: '#dc2626'},
+                        {arabic: 'أزرق', pronunciation: 'azraq', italian: 'Blu', color: '#2563eb'},
+                        {arabic: 'أصفر', pronunciation: 'aṣfar', italian: 'Giallo', color: '#eab308'},
+                        {arabic: 'أخضر', pronunciation: 'akhḍar', italian: 'Verde', color: '#16a34a'},
+                        {arabic: 'أسود', pronunciation: 'aswad', italian: 'Nero', color: '#000000'},
+                        {arabic: 'أبيض', pronunciation: 'abyaḍ', italian: 'Bianco', color: '#ffffff'},
+                        {arabic: 'وردي', pronunciation: 'wardī', italian: 'Rosa', color: '#ec4899'},
+                        {arabic: 'بنفسجي', pronunciation: 'banafsajī', italian: 'Viola', color: '#9333ea'},
+                        {arabic: 'برتقالي', pronunciation: 'burtuqālī', italian: 'Arancione', color: '#ea580c'},
+                        {arabic: 'بني', pronunciation: 'bunnī', italian: 'Marrone', color: '#92400e'},
+                        {arabic: 'رمادي', pronunciation: 'ramādī', italian: 'Grigio', color: '#6b7280'}
+                    ]
+                },
+                5: {
+                    title: 'العائلة (Famiglia)',
+                    description: 'أفراد العائلة - Membri della famiglia',
+                    content: [
+                        {arabic: 'أم', pronunciation: 'umm', italian: 'Madre'},
+                        {arabic: 'أب', pronunciation: 'ab', italian: 'Padre'},
+                        {arabic: 'أخ', pronunciation: 'akh', italian: 'Fratello'},
+                        {arabic: 'أخت', pronunciation: 'ukht', italian: 'Sorella'},
+                        {arabic: 'جد', pronunciation: 'jadd', italian: 'Nonno'},
+                        {arabic: 'جدة', pronunciation: 'jadda', italian: 'Nonna'},
+                        {arabic: 'ابن', pronunciation: 'ibn', italian: 'Figlio'},
+                        {arabic: 'ابنة', pronunciation: 'ibna', italian: 'Figlia'},
+                        {arabic: 'عم', pronunciation: 'ʿamm', italian: 'Zio (paterno)'},
+                        {arabic: 'عمة', pronunciation: 'ʿamma', italian: 'Zia (paterna)'},
+                        {arabic: 'خال', pronunciation: 'khāl', italian: 'Zio (materno)'},
+                        {arabic: 'خالة', pronunciation: 'khāla', italian: 'Zia (materna)'},
+                        {arabic: 'زوج', pronunciation: 'zawj', italian: 'Marito'},
+                        {arabic: 'زوجة', pronunciation: 'zawja', italian: 'Moglie'},
+                        {arabic: 'عائلة', pronunciation: 'ʿāʾila', italian: 'Famiglia'}
+                    ]
+                },
+                6: {
+                    title: 'الطعام (Cibo)',
+                    description: 'الطعام والشراب الأساسي - Cibi e bevande di base',
+                    content: [
+                        {arabic: 'أرز', pronunciation: 'aruzz', italian: 'Riso'},
+                        {arabic: 'خبز', pronunciation: 'khubz', italian: 'Pane'},
+                        {arabic: 'ماء', pronunciation: 'māʾ', italian: 'Acqua'},
+                        {arabic: 'شاي', pronunciation: 'shāy', italian: 'Tè'},
+                        {arabic: 'قهوة', pronunciation: 'qahwa', italian: 'Caffè'},
+                        {arabic: 'لحم', pronunciation: 'laḥm', italian: 'Carne'},
+                        {arabic: 'سمك', pronunciation: 'samak', italian: 'Pesce'},
+                        {arabic: 'دجاج', pronunciation: 'dajāj', italian: 'Pollo'},
+                        {arabic: 'فاكهة', pronunciation: 'fākiha', italian: 'Frutta'},
+                        {arabic: 'خضار', pronunciation: 'khuḍār', italian: 'Verdura'},
+                        {arabic: 'تفاح', pronunciation: 'tuffāḥ', italian: 'Mela'},
+                        {arabic: 'موز', pronunciation: 'mawz', italian: 'Banana'},
+                        {arabic: 'حليب', pronunciation: 'ḥalīb', italian: 'Latte'},
+                        {arabic: 'عسل', pronunciation: 'ʿasal', italian: 'Miele'}
+                    ]
+                },
+                7: {
+                    title: 'الوقت (Tempo)',
+                    description: 'تعبيرات الوقت - Espressioni di tempo',
+                    content: [
+                        {arabic: 'اليوم', pronunciation: 'al-yawm', italian: 'Oggi'},
+                        {arabic: 'غداً', pronunciation: 'ghadan', italian: 'Domani'},
+                        {arabic: 'أمس', pronunciation: 'ams', italian: 'Ieri'},
+                        {arabic: 'الآن', pronunciation: 'al-ān', italian: 'Adesso'},
+                        {arabic: 'بعد', pronunciation: 'baʿd', italian: 'Dopo'},
+                        {arabic: 'قبل', pronunciation: 'qabl', italian: 'Prima'},
+                        {arabic: 'ساعة', pronunciation: 'sāʿa', italian: 'Ora'},
+                        {arabic: 'دقيقة', pronunciation: 'daqīqa', italian: 'Minuto'},
+                        {arabic: 'ثانية', pronunciation: 'thāniya', italian: 'Secondo'},
+                        {arabic: 'أسبوع', pronunciation: 'usbūʿ', italian: 'Settimana'},
+                        {arabic: 'شهر', pronunciation: 'shahr', italian: 'Mese'},
+                        {arabic: 'سنة', pronunciation: 'sana', italian: 'Anno'},
+                        {arabic: 'صباح', pronunciation: 'ṣabāḥ', italian: 'Mattina'},
+                        {arabic: 'ظهر', pronunciation: 'ẓuhr', italian: 'Mezzogiorno'},
+                        {arabic: 'عصر', pronunciation: 'ʿaṣr', italian: 'Pomeriggio'},
+                        {arabic: 'مساء', pronunciation: 'masāʾ', italian: 'Sera'}
+                    ]
+                },
+                8: {
+                    title: 'الأفعال (Verbi)',
+                    description: 'الأفعال الأساسية - Verbi essenziali',
+                    content: [
+                        {arabic: 'يأتي', pronunciation: 'yaʾtī', italian: 'Venire'},
+                        {arabic: 'يذهب', pronunciation: 'yadhab', italian: 'Andare'},
+                        {arabic: 'يفعل', pronunciation: 'yafʿal', italian: 'Fare'},
+                        {arabic: 'يكون', pronunciation: 'yakūn', italian: 'Essere'},
+                        {arabic: 'يملك', pronunciation: 'yamlik', italian: 'Avere'},
+                        {arabic: 'يأكل', pronunciation: 'yaʾkul', italian: 'Mangiare'},
+                        {arabic: 'يشرب', pronunciation: 'yashrab', italian: 'Bere'},
+                        {arabic: 'يرى', pronunciation: 'yarā', italian: 'Vedere'},
+                        {arabic: 'يسمع', pronunciation: 'yasmaʿ', italian: 'Sentire'},
+                        {arabic: 'يتكلم', pronunciation: 'yatakallam', italian: 'Parlare'},
+                        {arabic: 'يقرأ', pronunciation: 'yaqraʾ', italian: 'Leggere'},
+                        {arabic: 'يكتب', pronunciation: 'yaktub', italian: 'Scrivere'},
+                        {arabic: 'يتعلم', pronunciation: 'yataʿallam', italian: 'Imparare'},
+                        {arabic: 'يعمل', pronunciation: 'yaʿmal', italian: 'Lavorare'},
+                        {arabic: 'ينام', pronunciation: 'yanām', italian: 'Dormire'},
+                        {arabic: 'يشتري', pronunciation: 'yashtarī', italian: 'Comprare'}
+                    ]
+                }
+            };
+
+            const lesson = lessons[lessonNumber];
+            if (lesson) {
+                showLessonContent(lesson.title, lesson.description, lesson.content, lessonNumber);
             } else {
-                alert(`🔒 الدرس ${lessonNumber} سيكون متاحا قريبا! أكمل الدروس السابقة أولا.`);
+                alert(`🎉 تهانينا! الدرس ${lessonNumber} متاح ومفتوح!`);
             }
         }
 
-        function showLessonContent(title, description, characters) {
+        function showLessonContent(title, description, content, lessonNumber) {
             // Create lesson modal
             const modal = document.createElement('div');
             modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            
+            let contentHTML = '';
+            if (lessonNumber === 1) {
+                // Alphabet layout
+                contentHTML = content.map(item => `
+                    <div class="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-4xl font-bold mb-2 text-green-600 arabic-font">${item.arabic}</div>
+                        <div class="text-lg font-bold mb-2 arabic-font">${item.name}</div>
+                        <div class="pronunciation-badge rounded-full px-3 py-1 mb-3 inline-block">
+                            <span class="font-bold text-amber-800">${item.pronunciation}</span>
+                        </div>
+                        <div class="text-gray-600 text-sm">${item.italian}</div>
+                    </div>
+                `).join('');
+            } else if (lessonNumber === 4) {
+                // Colors layout
+                contentHTML = content.map(item => `
+                    <div class="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl p-6 text-center card-hover">
+                        <div class="w-16 h-16 rounded-full mx-auto mb-3 border-4 border-white shadow-lg" style="background-color: ${item.color}"></div>
+                        <div class="text-xl font-bold mb-2 text-green-600 arabic-font">${item.arabic}</div>
+                        <div class="pronunciation-badge rounded-full px-3 py-1 mb-2 inline-block">
+                            <span class="font-bold text-amber-800">${item.pronunciation}</span>
+                        </div>
+                        <div class="text-gray-600 text-sm">${item.italian}</div>
+                    </div>
+                `).join('');
+            } else if (lessonNumber === 3) {
+                // Numbers layout
+                contentHTML = content.map(item => `
+                    <div class="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-3xl font-bold mb-2 text-green-600 arabic-font">${item.number}</div>
+                        <div class="text-xl font-bold mb-2 arabic-font">${item.arabic}</div>
+                        <div class="pronunciation-badge rounded-full px-3 py-1 mb-2 inline-block">
+                            <span class="font-bold text-amber-800">${item.pronunciation}</span>
+                        </div>
+                        <div class="text-gray-600 text-sm">${item.italian}</div>
+                    </div>
+                `).join('');
+            } else {
+                // Standard layout for other lessons
+                contentHTML = content.map(item => `
+                    <div class="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-2xl font-bold mb-2 text-green-600 arabic-font">${item.arabic}</div>
+                        <div class="pronunciation-badge rounded-full px-3 py-1 mb-3 inline-block">
+                            <span class="font-bold text-amber-800">${item.pronunciation}</span>
+                        </div>
+                        <div class="text-gray-600 text-sm">${item.italian}</div>
+                    </div>
+                `).join('');
+            }
+
             modal.innerHTML = `
-                <div class="bg-white rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="bg-white rounded-2xl p-8 max-w-6xl w-full max-h-[90vh] overflow-y-auto">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-3xl font-bold text-gray-800">${title}</h2>
+                        <h2 class="text-3xl font-bold text-gray-800 arabic-font">${title}</h2>
                         <button onclick="closeLessonModal()" class="text-gray-500 hover:text-gray-700 text-2xl">✕</button>
                     </div>
                     
-                    <p class="text-gray-600 mb-8 arabic-text">${description}</p>
+                    <p class="text-gray-600 mb-8">${description}</p>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                        ${characters.map(char => `
-                            <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 text-center card-hover">
-                                <div class="text-4xl arabic-text mb-4 text-green-600">${char.char}</div>
-                                <div class="text-lg font-bold mb-2">${char.sound}</div>
-                                <div class="text-gray-600 arabic-text text-sm">${char.example}</div>
-                            </div>
-                        `).join('')}
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+                        ${contentHTML}
                     </div>
                     
                     <div class="flex gap-4 justify-center">
-                        <button onclick="startLessonQuiz('${title}')" class="bg-gradient-to-r from-green-600 to-green-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all">
-                            🎯 اختبار
+                        <button onclick="startLessonQuiz('${title}')" class="bg-gradient-to-r from-green-600 to-yellow-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all">
+                            🎯 اختبار (Fai il Test)
                         </button>
                         <button onclick="closeLessonModal()" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-300 transition-all">
-                            ✓ مكتمل
+                            ✓ مكتمل (Completato)
                         </button>
                     </div>
                 </div>
@@ -660,55 +909,55 @@
         function startLessonQuiz(lessonTitle) {
             closeLessonModal();
             showSection('exercises');
-            alert(`🎯 رائع! الآن جرب الاختبار لـ ${lessonTitle}. اذهب إلى قسم التمارين لاختبار ما تعلمته!`);
+            alert(`🎯 ممتاز! دعنا نجرب اختبار ${lessonTitle}. اذهب إلى قسم التمارين لاختبار ما تعلمته!`);
         }
 
         // Exercise functions
         let currentExercise = {
-            character: 'ع',
-            correctAnswer: 'ayn',
-            characters: [
-                {char: 'ع', answer: 'ayn', sound: 'AYN'},
-                {char: 'أ', answer: 'alif', sound: 'ALIF'},
-                {char: 'ب', answer: 'ba', sound: 'BA'},
-                {char: 'ت', answer: 'ta', sound: 'TA'},
-                {char: 'ث', answer: 'tha', sound: 'THA'},
-                {char: 'ج', answer: 'jim', sound: 'JIM'},
-                {char: 'ح', answer: 'ha', sound: 'HA'},
-                {char: 'خ', answer: 'kha', sound: 'KHA'}
+            words: [
+                {arabic: 'السلام عليكم', correct: 'pace', pronunciation: 'as-salāmu ʿalaykum'},
+                {arabic: 'شكراً', correct: 'grazie', pronunciation: 'shukran'},
+                {arabic: 'ماء', correct: 'acqua', pronunciation: 'māʾ'},
+                {arabic: 'أرز', correct: 'riso', pronunciation: 'aruzz'},
+                {arabic: 'أم', correct: 'madre', pronunciation: 'umm'},
+                {arabic: 'أب', correct: 'padre', pronunciation: 'ab'},
+                {arabic: 'أحمر', correct: 'rosso', pronunciation: 'aḥmar'},
+                {arabic: 'أزرق', correct: 'blu', pronunciation: 'azraq'}
             ],
             currentIndex: 0
         };
 
         function startExercise(type) {
-            if (type === 'matching') {
+            if (type === 'arabic') {
                 document.getElementById('exercises-section').scrollIntoView({behavior: 'smooth'});
                 document.getElementById('exercise-area').scrollIntoView({behavior: 'smooth'});
             } else {
-                alert(`🎵 تمرين النطق! في تطبيق حقيقي، ستستخدم هنا الميكروفون لممارسة نطق الحروف العربية.`);
+                alert(`🎵 تمرين النطق! في التطبيق الحقيقي، يمكنك استخدام الميكروفون لممارسة نطق الحروف العربية.`);
             }
         }
 
         function checkAnswer(answer) {
             const feedback = document.getElementById('exercise-feedback');
-            const character = currentExercise.characters[currentExercise.currentIndex];
+            const word = currentExercise.words[currentExercise.currentIndex];
             
-            if (answer === character.answer) {
+            if (answer === word.correct) {
                 feedback.innerHTML = `
                     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl mb-4 bounce-in">
-                        <strong>صحيح! 🎉</strong> ${character.char} si pronuncia "${character.sound}"
+                        <strong>صحيح! 🎉</strong> "${word.arabic}" significa "${word.correct}" in italiano
+                        <br><span class="text-sm">(Corretto! "${word.arabic}" vuol dire "${word.correct}")</span>
                     </div>
-                    <button onclick="nextExercise()" class="bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all">
-                        السؤال التالي →
+                    <button onclick="nextExercise()" class="bg-gradient-to-r from-green-500 to-yellow-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all">
+                        السؤال التالي ← (Prossima Domanda)
                     </button>
                 `;
             } else {
                 feedback.innerHTML = `
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl mb-4 bounce-in">
-                        <strong>حاول مرة أخرى! 🤔</strong> ${character.char} لا ينطق هكذا...
+                    <div class="bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded-xl mb-4 bounce-in">
+                        <strong>حاول مرة أخرى! 🤔</strong> "${word.arabic}" non significa "${answer}"...
+                        <br><span class="text-sm">(Riprova! "${word.arabic}" non vuol dire "${answer}"...)</span>
                     </div>
-                    <button onclick="nextExercise()" class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all">
-                        أظهر الإجابة
+                    <button onclick="nextExercise()" class="bg-gradient-to-r from-orange-500 to-green-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all">
+                        إظهار الإجابة (Mostra Risposta)
                     </button>
                 `;
             }
@@ -723,10 +972,11 @@
         }
 
         function nextExercise() {
-            currentExercise.currentIndex = (currentExercise.currentIndex + 1) % currentExercise.characters.length;
-            const character = currentExercise.characters[currentExercise.currentIndex];
+            currentExercise.currentIndex = (currentExercise.currentIndex + 1) % currentExercise.words.length;
+            const word = currentExercise.words[currentExercise.currentIndex];
             
-            document.getElementById('exercise-character').textContent = character.char;
+            document.getElementById('exercise-arabic').textContent = word.arabic;
+            document.getElementById('exercise-pronunciation').textContent = word.pronunciation;
             document.getElementById('exercise-feedback').classList.add('hidden');
             
             // Re-enable option buttons
@@ -738,17 +988,8 @@
 
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
-            // Add some interactive animations
-            setInterval(() => {
-                const progressBar = document.getElementById('progress-bar');
-                const currentWidth = parseInt(progressBar.style.width);
-                if (currentWidth < 100) {
-                    const newWidth = Math.min(currentWidth + Math.random() * 2, 100);
-                    progressBar.style.width = newWidth + '%';
-                    document.getElementById('progress-percent').textContent = Math.round(newWidth) + '%';
-                }
-            }, 6000);
+            console.log('🇸🇦 تطبيق تعلم العربية محمل! جميع المحتويات متاحة!');
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9701734342090e22',t:'MTc1NTM1Mjc0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'970aebff816de3b2',t:'MTc1NTQ1MjA2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
